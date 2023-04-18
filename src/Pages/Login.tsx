@@ -2,7 +2,6 @@ import {
   Button,
   Center,
   Container,
-  Flex,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -15,18 +14,49 @@ import {
 } from "@chakra-ui/react";
 import { FormEvent, useState } from "react";
 import Navbar from "../Components/Navbar";
+import ApiClient from "../Service/Api-Client";
+import { useSignIn } from "react-auth-kit";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const handleOnsubmit = (e: FormEvent) => {
-    emailTxt === "" ? setisErroremail(true) : setisErroremail(false);
-    passwordTxt === "" ? setisErrorPassword(true) : setisErrorPassword(false);
-    e.preventDefault();
-  };
   const [emailTxt, setEmailTxt] = useState("");
   const [passwordTxt, setPasswordTxt] = useState("");
   const [show, setShow] = useState(false);
   const [isErroremail, setisErroremail] = useState(false);
   const [isErrorPassword, setisErrorPassword] = useState(false);
+  const signIn = useSignIn();
+  const navigate = useNavigate();
+
+  const handleOnsubmit = (e: FormEvent) => {
+    emailTxt === "" ? setisErroremail(true) : setisErroremail(false);
+    passwordTxt === "" ? setisErrorPassword(true) : setisErrorPassword(false);
+    e.preventDefault();
+
+    if (emailTxt != "" && passwordTxt != "") {
+      const userInfo = {
+        email: emailTxt,
+        password: passwordTxt,
+      };
+
+      ApiClient.post("/user/validateuser", userInfo)
+        .then((res) => {
+          if (res.data.accessToken) {
+            signIn({
+              token: res.data.accessToken,
+              expiresIn: 3600,
+              tokenType: "Bearer",
+              authState: { email: emailTxt },
+            });
+            navigate("/home");
+          } else {
+            console.log("WRONG USER NAME OR PASSWORD");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
 
   return (
     <>

@@ -1,14 +1,20 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react";
-import React from "react";
+import { Button, Grid, GridItem, Show } from "@chakra-ui/react";
+import { useSignOut } from "react-auth-kit";
 
 function Home() {
+  const signOut = useSignOut();
+
+  const handleLogout = () => {
+    signOut();
+  };
+
   return (
     <>
       <Grid
         templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
       >
         <GridItem area="nav" bg={"gold"}>
-          NAVVV BARR
+          <Button onClick={() => handleLogout()}>Logout</Button>
         </GridItem>
 
         <Show above="lg">
