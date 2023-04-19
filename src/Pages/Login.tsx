@@ -12,51 +12,56 @@ import {
   InputRightElement,
   Show,
 } from "@chakra-ui/react";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import Navbar from "../Components/Navbar";
 import ApiClient from "../Service/Api-Client";
 import { useSignIn } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 function Login() {
-  const [emailTxt, setEmailTxt] = useState("");
-  const [passwordTxt, setPasswordTxt] = useState("");
   const [show, setShow] = useState(false);
-  const [isErroremail, setisErroremail] = useState(false);
-  const [isErrorPassword, setisErrorPassword] = useState(false);
   const signIn = useSignIn();
   const navigate = useNavigate();
+  const { handleSubmit, handleChange, values, touched, errors, handleBlur } =
+    useFormik({
+      initialValues: {
+        emailTxt: "",
+        passwordTxt: "",
+      },
+      validationSchema: Yup.object({
+        emailTxt: Yup.string().required("Please Enter Email"),
+        passwordTxt: Yup.string()
+          .required("Please Enter Password")
+          .min(6, "Password should be longer than 6 characters"),
+      }),
+      onSubmit: ({ emailTxt, passwordTxt }) => {
+        const userInfo = {
+          email: emailTxt,
+          password: passwordTxt,
+        };
 
-  const handleOnsubmit = (e: FormEvent) => {
-    emailTxt === "" ? setisErroremail(true) : setisErroremail(false);
-    passwordTxt === "" ? setisErrorPassword(true) : setisErrorPassword(false);
-    e.preventDefault();
-
-    if (emailTxt != "" && passwordTxt != "") {
-      const userInfo = {
-        email: emailTxt,
-        password: passwordTxt,
-      };
-
-      ApiClient.post("/user/validateuser", userInfo)
-        .then((res) => {
-          if (res.data.accessToken) {
-            signIn({
-              token: res.data.accessToken,
-              expiresIn: 3600,
-              tokenType: "Bearer",
-              authState: { email: emailTxt },
-            });
-            navigate("/home");
-          } else {
-            console.log("WRONG USER NAME OR PASSWORD");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
+        ApiClient.post("/user/validateuser", userInfo)
+          .then((res) => {
+            if (res.data.accessToken) {
+              signIn({
+                token: res.data.accessToken,
+                expiresIn: 3600,
+                tokenType: "Bearer",
+                authState: { email: emailTxt },
+              });
+              navigate("/home");
+            } else {
+              console.log("WRONG USER NAME OR PASSWORD");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+    });
 
   return (
     <>
@@ -75,51 +80,52 @@ function Login() {
 
         <GridItem area="bside">
           <Container>
-            <form onSubmit={(e) => handleOnsubmit(e)}>
-              <FormControl isInvalid={isErroremail}>
+            <form onSubmit={handleSubmit}>
+              <FormControl isInvalid={errors.emailTxt ? true : false}>
                 <FormLabel marginTop={3}>Email</FormLabel>
                 <Input
+                  borderWidth={3}
                   marginTop={3}
+                  id="emailTxt"
                   size="lg"
                   type="email"
-                  value={emailTxt}
-                  onChange={(e) => {
-                    setEmailTxt(e.target.value);
-                    setisErroremail(false);
-                  }}
+                  onChange={handleChange}
+                  value={values.emailTxt}
+                  onBlur={handleBlur}
+                  placeholder="example@.com"
                 />
-                {isErroremail && (
-                  <FormErrorMessage>Email is required.</FormErrorMessage>
-                )}
+                {touched.emailTxt && errors.emailTxt ? (
+                  <FormErrorMessage>{errors.emailTxt}</FormErrorMessage>
+                ) : null}
               </FormControl>
 
-              <FormControl isInvalid={isErrorPassword}>
+              <FormControl isInvalid={errors.passwordTxt ? true : false}>
                 <FormLabel marginTop={3}>Password</FormLabel>
                 <InputGroup size="lg" marginTop={3}>
                   <Input
+                    borderWidth={3}
                     pr="4.5rem"
                     type={show ? "text" : "password"}
                     placeholder="Enter password"
-                    value={passwordTxt}
-                    onChange={(e) => {
-                      setPasswordTxt(e.target.value);
-                      setisErrorPassword(false);
-                    }}
+                    id="passwordTxt"
+                    onChange={handleChange}
+                    value={values.passwordTxt}
+                    onBlur={handleBlur}
                   />
-                  <InputRightElement width="4.5rem">
+                  <InputRightElement>
                     <Button
+                      leftIcon={show ? <ViewOffIcon /> : <ViewIcon />}
                       h="1.75rem"
                       size="md"
                       onClick={() => setShow(!show)}
-                      marginRight={1}
-                    >
-                      {show ? "Hide" : "Show"}
-                    </Button>
+                      marginRight={3}
+                      variant={"ghost"}
+                    ></Button>
                   </InputRightElement>
                 </InputGroup>
-                {isErrorPassword && (
-                  <FormErrorMessage>Password is required.</FormErrorMessage>
-                )}
+                {touched.emailTxt && errors.emailTxt ? (
+                  <FormErrorMessage>{errors.passwordTxt}</FormErrorMessage>
+                ) : null}
               </FormControl>
               <Center marginTop={3}>
                 <Button
