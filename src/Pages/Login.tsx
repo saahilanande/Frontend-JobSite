@@ -1,4 +1,6 @@
 import {
+  Alert,
+  AlertIcon,
   Button,
   Center,
   Container,
@@ -23,6 +25,7 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 function Login() {
   const [show, setShow] = useState(false);
+  const [invalidCred, setInvalidCred] = useState(false);
   const signIn = useSignIn();
   const navigate = useNavigate();
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } =
@@ -45,7 +48,7 @@ function Login() {
 
         ApiClient.post("/user/validateuser", userInfo)
           .then((res) => {
-            if (res.data.accessToken) {
+            if (res.status == 200) {
               signIn({
                 token: res.data.accessToken,
                 expiresIn: 3600,
@@ -54,11 +57,14 @@ function Login() {
               });
               navigate("/home");
             } else {
-              console.log("WRONG USER NAME OR PASSWORD");
+              console.log("Wrong email addess or password");
+              setInvalidCred(true);
+              values.emailTxt = "";
+              values.passwordTxt = "";
             }
           })
           .catch((err) => {
-            console.log(err);
+            console.log(err.message);
           });
       },
     });
@@ -127,6 +133,12 @@ function Login() {
                   <FormErrorMessage>{errors.passwordTxt}</FormErrorMessage>
                 ) : null}
               </FormControl>
+              {values.emailTxt == "" && invalidCred ? (
+                <Alert status="error" marginTop={2}>
+                  <AlertIcon />
+                  Wrong email Id or Password
+                </Alert>
+              ) : null}
               <Center marginTop={3}>
                 <Button
                   marginTop={3}
