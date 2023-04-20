@@ -15,10 +15,14 @@ import {
   InputRightElement,
   Center,
   FormErrorMessage,
+  Spinner,
+  Icon,
+  ScaleFade,
 } from "@chakra-ui/react";
 import Navbar from "../Components/Navbar";
 import {
   AtSignIcon,
+  CheckCircleIcon,
   ChevronRightIcon,
   PhoneIcon,
   ViewIcon,
@@ -28,10 +32,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import ApiClient from "../Service/Api-Client";
+import Successful from "../Components/Successful";
 
 function Register() {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } =
     useFormik({
@@ -52,7 +60,7 @@ function Register() {
         phonetxt: Yup.number()
           .typeError("Phone Number must be a number")
           .required("Please Enter your Phone number")
-          .min(10, "Phone number should be 10 numbers"),
+          .min(10000, "Phone number should be 10 numbers"),
       }),
       onSubmit: ({
         firstnametxt,
@@ -61,9 +69,36 @@ function Register() {
         passwordtxt,
         phonetxt,
       }) => {
-        console.log(firstnametxt, lastnametxt, emailtxt, passwordtxt, phonetxt);
+        const userinfo = {
+          first_name: firstnametxt,
+          last_name: lastnametxt,
+          email: emailtxt,
+          password: passwordtxt,
+          phone: phonetxt,
+        };
+
+        setIsLoading(true);
+        ApiClient.post("/user/adduser", userinfo)
+          .then((res) => {
+            console.log(res);
+            setIsLoading(false);
+            setSuccess(true);
+          })
+          .catch((err) => {
+            console.log(err.message);
+            setIsLoading(false);
+          });
       },
     });
+
+  {
+    if (success)
+      return (
+        <>
+          <Successful success={success} path="/login" />
+        </>
+      );
+  }
 
   return (
     <>
@@ -207,18 +242,22 @@ function Register() {
                     ) : null}
                   </FormControl>
                   <Center marginTop={3}>
-                    <Button
-                      marginTop={3}
-                      width={"100%"}
-                      colorScheme="blue"
-                      variant="solid"
-                      type="submit"
-                      size={"lg"}
-                      borderLeftRadius={25}
-                      borderRightRadius={25}
-                    >
-                      Sign up
-                    </Button>
+                    {isLoading ? (
+                      <Spinner size={"lg"} />
+                    ) : (
+                      <Button
+                        marginTop={3}
+                        width={"100%"}
+                        colorScheme="blue"
+                        variant="solid"
+                        type="submit"
+                        size={"lg"}
+                        borderLeftRadius={25}
+                        borderRightRadius={25}
+                      >
+                        Sign up
+                      </Button>
+                    )}
                   </Center>
                 </form>
               </Box>
