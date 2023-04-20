@@ -1,11 +1,14 @@
 import { Button, Grid, GridItem, Show } from "@chakra-ui/react";
 import { useSignOut } from "react-auth-kit";
 import Navbar from "../Components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const signOut = useSignOut();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
+    navigate("/register");
     signOut();
   };
 
@@ -15,8 +18,7 @@ function Home() {
         templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
       >
         <GridItem area="nav" bg={"gold"}>
-          <Navbar />
-          <Button onClick={() => handleLogout()}>Logout</Button>
+          <Navbar onbuttonclick={() => handleLogout()} buttonName="Logout" />
         </GridItem>
 
         <Show above="lg">

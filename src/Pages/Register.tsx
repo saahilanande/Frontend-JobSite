@@ -16,13 +16,10 @@ import {
   Center,
   FormErrorMessage,
   Spinner,
-  Icon,
-  ScaleFade,
 } from "@chakra-ui/react";
 import Navbar from "../Components/Navbar";
 import {
   AtSignIcon,
-  CheckCircleIcon,
   ChevronRightIcon,
   PhoneIcon,
   ViewIcon,
@@ -104,7 +101,7 @@ function Register() {
     <>
       <Grid templateAreas={{ base: `"nav" "main"` }}>
         <GridItem area="nav">
-          <Navbar />
+          <Navbar onbuttonclick={() => navigate("/login")} buttonName="Login" />
         </GridItem>
 
         <GridItem area="main" padding={2}>

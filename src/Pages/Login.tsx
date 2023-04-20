@@ -81,7 +81,10 @@ function Login() {
         templateAreas={{ base: `"nav" "aside"`, lg: `"nav nav" "aside bside"` }}
       >
         <GridItem area="nav">
-          <Navbar />
+          <Navbar
+            onbuttonclick={() => navigate("/register")}
+            buttonName="Sign up"
+          />
         </GridItem>
 
         <Show above="lg">

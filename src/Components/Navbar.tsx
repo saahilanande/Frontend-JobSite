@@ -4,7 +4,12 @@ import logo from "../assets/logo.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import ColorModeSwitch from "./ColorModeSwitch";
 
-function Navbar() {
+interface props {
+  buttonName: string;
+  onbuttonclick: () => void;
+}
+
+function Navbar({ buttonName, onbuttonclick }: props) {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -23,17 +28,9 @@ function Navbar() {
           colorScheme="blue"
           variant={"outline"}
           borderRadius={25}
-          onClick={
-            location.pathname === "/login"
-              ? () => {
-                  navigate("/register");
-                }
-              : () => {
-                  navigate("/login");
-                }
-          }
+          onClick={() => onbuttonclick()}
         >
-          {location.pathname === "/login" ? "Sign in" : "Login"}
+          {buttonName}
         </Button>
         <Divider orientation="vertical" height={10} borderWidth={"1px"} />
         <ColorModeSwitch />
