@@ -10,12 +10,12 @@ function App() {
       <Routes>
         <Route element={<Login />} path="/login"></Route>
         <Route
+          path={"/home"}
           element={
-            <RequireAuth loginPath="/login">
+            <RequireAuth loginPath={"/login"}>
               <Home />
             </RequireAuth>
           }
-          path="/home"
         ></Route>
         <Route element={<Register />} path="/register"></Route>
       </Routes>
