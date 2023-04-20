@@ -1,4 +1,4 @@
-import { Button, Grid, GridItem, Show } from "@chakra-ui/react";
+import { Grid, GridItem, Show } from "@chakra-ui/react";
 import { useSignOut } from "react-auth-kit";
 import Navbar from "../Components/Navbar";
 import { useNavigate } from "react-router-dom";

@@ -16,6 +16,8 @@ import {
   Center,
   FormErrorMessage,
   Spinner,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 import Navbar from "../Components/Navbar";
 import {
@@ -33,10 +35,11 @@ import ApiClient from "../Service/Api-Client";
 import Successful from "../Components/Successful";
 
 function Register() {
-  const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [emailExist, setEmailExist] = useState(false);
 
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } =
     useFormik({
@@ -77,9 +80,14 @@ function Register() {
         setIsLoading(true);
         ApiClient.post("/user/adduser", userinfo)
           .then((res) => {
-            console.log(res);
-            setIsLoading(false);
-            setSuccess(true);
+            console.log(res.status);
+            if (res.status === 208) {
+              setEmailExist(true);
+              setIsLoading(false);
+            } else {
+              setIsLoading(false);
+              setSuccess(true);
+            }
           })
           .catch((err) => {
             console.log(err.message);
@@ -238,6 +246,12 @@ function Register() {
                       <FormErrorMessage>{errors.phonetxt}</FormErrorMessage>
                     ) : null}
                   </FormControl>
+                  {emailExist && (
+                    <Alert status="error" marginTop={2}>
+                      <AlertIcon />
+                      Email ID Already Exsist
+                    </Alert>
+                  )}
                   <Center marginTop={3}>
                     {isLoading ? (
                       <Spinner size={"lg"} />
