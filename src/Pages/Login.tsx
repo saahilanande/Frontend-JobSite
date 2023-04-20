@@ -94,9 +94,8 @@ function Login() {
           <Container marginTop={"10%"}>
             <Container
               padding={10}
-              borderStyle={"solid"}
-              borderWidth={"2px"}
-              borderColor={"blackAlpha.500"}
+              borderWidth={"1px"}
+              borderColor={"blackAlpha.300"}
             >
               <form onSubmit={handleSubmit}>
                 <FormControl isInvalid={errors.emailTxt ? true : false}>
@@ -111,7 +110,7 @@ function Login() {
                     value={values.emailTxt}
                     onBlur={handleBlur}
                     placeholder="example@.com"
-                    borderColor={"blackAlpha.500"}
+                    borderColor={"blackAlpha.300"}
                   />
                   {touched.emailTxt && errors.emailTxt ? (
                     <FormErrorMessage>{errors.emailTxt}</FormErrorMessage>
@@ -130,7 +129,7 @@ function Login() {
                       onChange={handleChange}
                       value={values.passwordTxt}
                       onBlur={handleBlur}
-                      borderColor={"blackAlpha.500"}
+                      borderColor={"blackAlpha.300"}
                     />
                     <InputRightElement>
                       <Button
@@ -184,9 +183,8 @@ function Login() {
               centerContent
               marginTop={3}
               padding={5}
-              borderStyle={"solid"}
-              borderWidth={"2px"}
-              borderColor={"blackAlpha.500"}
+              borderWidth={"1px"}
+              borderColor={"blackAlpha.300"}
             >
               <HStack>
                 <Text>Don't have an account? </Text>
