@@ -68,7 +68,7 @@ function Register() {
   return (
     <>
       <Grid templateAreas={{ base: `"nav" "main"` }}>
-        <GridItem area="nav" bg={"gold"}>
+        <GridItem area="nav">
           <Navbar />
         </GridItem>
 

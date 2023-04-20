@@ -11,12 +11,13 @@ function Navbar() {
   if (location.pathname === "/login")
     return (
       <>
-        <HStack spacing="13px" marginLeft={5} marginRight={5}>
+        <HStack spacing="13px" marginLeft={10} marginRight={5}>
           <Img
             _hover={{ cursor: "pointer" }}
-            src={""}
-            boxSize={"60px"}
+            src={logo}
             padding={1}
+            maxWidth={40}
+            maxHeight={20}
           ></Img>
           <Spacer />
           <Button
@@ -37,11 +38,12 @@ function Navbar() {
     );
   return (
     <>
-      <HStack spacing="13px" marginLeft={5} marginRight={5}>
+      <HStack spacing="13px" marginLeft={10} marginRight={5}>
         <Img
           _hover={{ cursor: "pointer" }}
           src={logo}
-          boxSize={"60px"}
+          maxWidth={40}
+          maxHeight={20}
           padding={1}
         ></Img>
         <Spacer />
