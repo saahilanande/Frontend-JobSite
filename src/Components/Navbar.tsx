@@ -32,7 +32,7 @@ function Navbar({ buttonName, onbuttonclick }: props) {
         >
           {buttonName}
         </Button>
-        <Divider orientation="vertical" height={10} borderWidth={"1px"} />
+        <Divider orientation="vertical" height={10} bgColor={"gray"} />
         <ColorModeSwitch />
         <AvatarMenu />
       </HStack>

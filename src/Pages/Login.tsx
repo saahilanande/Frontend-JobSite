@@ -17,6 +17,7 @@ import {
   InputGroup,
   InputRightElement,
   Show,
+  Spinner,
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -29,9 +30,14 @@ import * as Yup from "yup";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import loginBackground from "../assets/loginbackground2.png";
 
-function Login() {
+interface props {
+  setApi: (key: string) => void;
+}
+
+function Login({ setApi }: props) {
   const [show, setShow] = useState(false);
   const [invalidCred, setInvalidCred] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const signIn = useSignIn();
   const navigate = useNavigate();
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } =
@@ -52,6 +58,7 @@ function Login() {
           password: passwordTxt,
         };
 
+        setIsLoading(true);
         ApiClient.post("/user/validateuser", userInfo)
           .then((res) => {
             if (res.status == 200) {
@@ -61,6 +68,7 @@ function Login() {
                 tokenType: "Bearer",
                 authState: { email: emailTxt },
               });
+              setApi(res.data.api_key);
               navigate("/home");
             } else {
               console.log("Wrong email addess or password");
@@ -68,9 +76,11 @@ function Login() {
               values.emailTxt = "";
               values.passwordTxt = "";
             }
+            setIsLoading(false);
           })
           .catch((err) => {
             console.log(err.message);
+            setIsLoading(false);
           });
       },
     });
@@ -156,25 +166,37 @@ function Login() {
                   </Alert>
                 ) : null}
                 <Center marginTop={3}>
-                  <Button
-                    marginTop={3}
-                    width={"100%"}
-                    colorScheme="blue"
-                    variant="solid"
-                    type="submit"
-                    size={"lg"}
-                    borderLeftRadius={25}
-                    borderRightRadius={25}
-                  >
-                    Login
-                  </Button>
+                  {isLoading ? (
+                    <Spinner size={"lg"} />
+                  ) : (
+                    <Button
+                      marginTop={3}
+                      width={"100%"}
+                      colorScheme="blue"
+                      variant="solid"
+                      type="submit"
+                      size={"lg"}
+                      borderLeftRadius={25}
+                      borderRightRadius={25}
+                    >
+                      Login
+                    </Button>
+                  )}
                 </Center>
               </form>
               <Box marginTop={2}>
                 <HStack spacing={2}>
-                  <Divider orientation="horizontal" />
+                  <Divider
+                    orientation="horizontal"
+                    height={"1px"}
+                    bgColor={"gray"}
+                  />
                   <Text>or</Text>
-                  <Divider orientation="horizontal" />
+                  <Divider
+                    orientation="horizontal"
+                    height={"1px"}
+                    bgColor={"gray"}
+                  />
                 </HStack>
               </Box>
               <Container centerContent>

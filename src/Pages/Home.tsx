@@ -2,15 +2,25 @@ import { Grid, GridItem, Show } from "@chakra-ui/react";
 import { useSignOut } from "react-auth-kit";
 import Navbar from "../Components/Navbar";
 import { useNavigate } from "react-router-dom";
+import useFetchJobs from "../Hooks/useFetchJobs";
+import JobCard from "../Components/JobCard";
 
-function Home() {
+interface props {
+  apikey: string;
+}
+
+function Home({ apikey }: props) {
   const signOut = useSignOut();
   const navigate = useNavigate();
 
+  const { jobData, isLoading, isError } = useFetchJobs(apikey);
+
   const handleLogout = () => {
-    navigate("/register");
+    navigate("/login");
     signOut();
   };
+
+  console.log(jobData);
 
   return (
     <>
@@ -23,12 +33,21 @@ function Home() {
 
         <Show above="lg">
           <GridItem area="aside" bg={"black"}>
-            SIDE NAVVV
+            {apikey}
           </GridItem>
         </Show>
 
         <GridItem area="main" padding={2} bg={"cyan"}>
-          MAINN AREAAAAAAA
+          <ul>
+            {jobData.map((data) => (
+              <li key={data._id}>
+                {data.job_type}
+                {data.job_description}
+                {data.location}
+              </li>
+            ))}
+          </ul>
+          <JobCard />
         </GridItem>
       </Grid>
     </>

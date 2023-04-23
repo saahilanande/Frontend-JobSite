@@ -80,7 +80,6 @@ function Register() {
         setIsLoading(true);
         ApiClient.post("/user/adduser", userinfo)
           .then((res) => {
-            console.log(res.status);
             if (res.status === 208) {
               setEmailExist(true);
               setIsLoading(false);
@@ -125,9 +124,17 @@ function Register() {
               </Container>
               <Box marginTop={2}>
                 <HStack spacing={2}>
-                  <Divider orientation="horizontal" />
+                  <Divider
+                    orientation="horizontal"
+                    height={"1px"}
+                    bgColor={"gray"}
+                  />
                   <Text>or</Text>
-                  <Divider orientation="horizontal" />
+                  <Divider
+                    orientation="horizontal"
+                    height={"1px"}
+                    bgColor={"gray"}
+                  />
                 </HStack>
                 <form onSubmit={handleSubmit}>
                   <FormControl isInvalid={errors.firstnametxt ? true : false}>
