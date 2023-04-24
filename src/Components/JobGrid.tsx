@@ -11,17 +11,7 @@ function JobGrid({ jobData }: props) {
     <>
       <SimpleGrid columns={1} padding={10}>
         {jobData.map((data) => (
-          <JobCard
-            key={data._id}
-            employment_type={data.employment_type}
-            jobTitle={data.title}
-            jobDescription={data.job_description}
-            jobType={data.job_type}
-            joblocation={data.location}
-            companyImg=""
-            companyName={"Company Example"}
-            applicationTime={data.updatedAt}
-          />
+          <JobCard key={data._id} jobData={data} />
         ))}
       </SimpleGrid>
     </>

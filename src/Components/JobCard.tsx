@@ -13,28 +13,13 @@ import {
 import noImage from "../assets/no-image.png";
 import { MdLocationOn } from "react-icons/md";
 import { RiSuitcaseLine } from "react-icons/ri";
-import { GiSandsOfTime } from "react-icons/gi";
+import { JobDataSchema } from "../Hooks/useFetchJobs";
 
 interface props {
-  companyImg: string;
-  jobTitle: string;
-  joblocation: string;
-  companyName: string;
-  jobDescription: string;
-  jobType: string;
-  employment_type: string;
-  applicationTime: Date;
+  jobData: JobDataSchema;
 }
 
-function JobCard({
-  companyImg,
-  jobTitle,
-  joblocation,
-  companyName,
-  applicationTime,
-  jobDescription,
-  jobType,
-}: props) {
+function JobCard({ jobData }: props) {
   return (
     <Card
       onClick={() => console.log("Clicked")}
@@ -54,10 +39,10 @@ function JobCard({
             marginBottom={1}
             fontFamily={"sans-serif"}
           >
-            {jobTitle}
+            {jobData.title}
           </Heading>
           <HStack spacing={1}>
-            <Text>{companyName}</Text>
+            <Text>{"Company name"}</Text>
             <Divider
               orientation="vertical"
               height={3}
@@ -65,11 +50,11 @@ function JobCard({
               bgColor={"black"}
             />
             <MdLocationOn />
-            <Text>{joblocation}</Text>
+            <Text>{jobData.location}</Text>
           </HStack>
           <HStack spacing={1}>
             <RiSuitcaseLine />
-            <Text> {jobType}</Text>
+            <Text fontSize={"xs"}> {jobData.job_type}</Text>
             <Divider
               orientation="vertical"
               height={3}
@@ -77,7 +62,7 @@ function JobCard({
               bgColor={"gray"}
             />
             <Text fontSize={"xs"} color={"gray.600"}>
-              - {applicationTime.toString()}
+              - {jobData.updatedAt.toString()}
             </Text>
           </HStack>
           <Divider
@@ -87,7 +72,7 @@ function JobCard({
             marginBottom={1}
           ></Divider>
           <Text fontSize="sm" noOfLines={2}>
-            {jobDescription}
+            {jobData.job_description}
           </Text>
         </CardBody>
         <Button marginTop={4} marginRight={2} colorScheme={"blue"}>
