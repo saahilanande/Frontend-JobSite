@@ -8,6 +8,8 @@ export interface JobDataSchema {
   job_type: string;
   location: string;
   salary: number;
+  employment_type: string;
+  updatedAt: Date;
 }
 
 const useFetchJobs = (apikey: string) => {

@@ -26,7 +26,7 @@ function Home({ apikey }: props) {
       <Grid
         templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
       >
-        <GridItem area="nav" bg={"gold"}>
+        <GridItem area="nav">
           <Navbar onbuttonclick={() => handleLogout()} buttonName="Logout" />
         </GridItem>
 
@@ -36,7 +36,7 @@ function Home({ apikey }: props) {
           </GridItem>
         </Show>
 
-        <GridItem area="main" padding={2} bg={"cyan"}>
+        <GridItem area="main" padding={2}>
           <JobGrid jobData={jobData} />
         </GridItem>
       </Grid>

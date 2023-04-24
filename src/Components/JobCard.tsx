@@ -20,9 +20,10 @@ interface props {
   jobTitle: string;
   joblocation: string;
   companyName: string;
-  applicationTime: string;
   jobDescription: string;
   jobType: string;
+  employment_type: string;
+  applicationTime: Date;
 }
 
 function JobCard({
@@ -73,9 +74,11 @@ function JobCard({
               orientation="vertical"
               height={3}
               borderWidth={"1px"}
-              bgColor={"black"}
+              bgColor={"gray"}
             />
-            <Text> {applicationTime}</Text>
+            <Text fontSize={"xs"} color={"gray.600"}>
+              - {applicationTime.toString()}
+            </Text>
           </HStack>
           <Divider
             height={"1px"}
@@ -83,7 +86,7 @@ function JobCard({
             marginTop={1}
             marginBottom={1}
           ></Divider>
-          <Text fontSize="sm" noOfLines={3}>
+          <Text fontSize="sm" noOfLines={2}>
             {jobDescription}
           </Text>
         </CardBody>
