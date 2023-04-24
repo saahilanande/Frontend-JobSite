@@ -1,10 +1,27 @@
 import { SimpleGrid } from "@chakra-ui/react";
-import React from "react";
+import { JobDataSchema } from "../Hooks/useFetchJobs";
+import JobCard from "./JobCard";
 
-function JobGrid() {
+interface props {
+  jobData: JobDataSchema[];
+}
+
+function JobGrid({ jobData }: props) {
   return (
     <>
-      <SimpleGrid></SimpleGrid>
+      <SimpleGrid columns={1}>
+        {jobData.map((data) => (
+          <JobCard
+            jobTitle={data.title}
+            jobDescription={data.job_description}
+            jobType={data.job_type}
+            joblocation={data.location}
+            companyImg=""
+            companyName={"Company Example"}
+            applicationTime={"TIME"}
+          />
+        ))}
+      </SimpleGrid>
     </>
   );
 }

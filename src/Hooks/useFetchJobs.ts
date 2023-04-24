@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
 import ApiClient from "../Service/Api-Client";
 
-interface JobDataSchema {
+export interface JobDataSchema {
   _id: string;
   title: string;
   job_description: string;
   job_type: string;
   location: string;
   salary: number;
-}
-
-interface jobs {
-  job: JobDataSchema;
 }
 
 const useFetchJobs = (apikey: string) => {

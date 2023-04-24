@@ -4,6 +4,7 @@ import Navbar from "../Components/Navbar";
 import { useNavigate } from "react-router-dom";
 import useFetchJobs from "../Hooks/useFetchJobs";
 import JobCard from "../Components/JobCard";
+import JobGrid from "../Components/JobGrid";
 
 interface props {
   apikey: string;
@@ -19,8 +20,6 @@ function Home({ apikey }: props) {
     navigate("/login");
     signOut();
   };
-
-  console.log(jobData);
 
   return (
     <>
@@ -38,16 +37,7 @@ function Home({ apikey }: props) {
         </Show>
 
         <GridItem area="main" padding={2} bg={"cyan"}>
-          <ul>
-            {jobData.map((data) => (
-              <li key={data._id}>
-                {data.job_type}
-                {data.job_description}
-                {data.location}
-              </li>
-            ))}
-          </ul>
-          <JobCard />
+          <JobGrid jobData={jobData} />
         </GridItem>
       </Grid>
     </>
