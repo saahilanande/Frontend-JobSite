@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useFetchJobs from "../Hooks/useFetchJobs";
 import JobCard from "../Components/JobCard";
 import JobGrid from "../Components/JobGrid";
+import SideBar from "../Components/SideBar";
 
 interface props {
   apikey: string;
@@ -31,8 +32,8 @@ function Home({ apikey }: props) {
         </GridItem>
 
         <Show above="lg">
-          <GridItem area="aside" bg={"black"}>
-            {apikey}
+          <GridItem area="aside">
+            <SideBar />
           </GridItem>
         </Show>
 
