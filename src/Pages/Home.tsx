@@ -11,12 +11,11 @@ interface props {
   apikey: string;
 }
 
-
-
 function Home({ apikey }: props) {
   const signOut = useSignOut();
   const navigate = useNavigate();
   const { jobData, isLoading, isError } = useFetchJobs(apikey);
+  const [filter, setFilter] = useState<string[]>([]);
 
   const handleLogout = () => {
     navigate("/login");
@@ -34,7 +33,18 @@ function Home({ apikey }: props) {
 
         <Show above="lg">
           <GridItem area="aside">
-            <SideBar />
+            <SideBar
+              filterlist={filter}
+              handleFilter={(filtername) => {
+                if (filter.includes(filtername)) {
+                  setFilter((oldarray) =>
+                    oldarray.filter((word) => word != filtername)
+                  );
+                } else {
+                  setFilter((oldarray) => [...oldarray, filtername]);
+                }
+              }}
+            />
           </GridItem>
         </Show>
 

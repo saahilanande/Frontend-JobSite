@@ -1,27 +1,22 @@
 import { Box, Flex, Heading, VStack } from "@chakra-ui/react";
 import EmploymentFilter from "./EmploymentFilter";
-import { useState } from "react";
 
-function SideBar() {
-  const [filter, setFilter] = useState<string[]>([]);
-  console.log(filter);
+interface props {
+  handleFilter: (filtertype: string) => void;
+  filterlist: string[];
+}
+
+function SideBar({ handleFilter, filterlist }: props) {
   return (
     <>
       <Flex marginLeft={5} padding={10}>
         <VStack spacing={1}>
           <Box marginBottom={5}>
             <Heading size={"sm"}>Filters: </Heading>
+            {filterlist.map((data) => data)}
           </Box>
           <EmploymentFilter
-            onfilterClick={(filtername) => {
-              if (filter.includes(filtername)) {
-                setFilter((oldarray) =>
-                  oldarray.filter((word) => word != filtername)
-                );
-              } else {
-                setFilter((oldarray) => [...oldarray, filtername]);
-              }
-            }}
+            onfilterClick={(filtername) => handleFilter(filtername)}
           />
         </VStack>
       </Flex>
