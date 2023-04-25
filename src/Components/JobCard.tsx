@@ -54,7 +54,7 @@ function JobCard({ jobData }: props) {
             <Text>{jobData.location}</Text>
           </HStack>
           <HStack spacing={1}>
-            <RiSuitcaseLine />
+            <RiSuitcaseLine/>
             <Text fontSize={"xs"}> {jobData.job_type}</Text>
             <Divider
               orientation="vertical"

@@ -11,7 +11,6 @@ interface props {
 
 function Navbar({ buttonName, onbuttonclick }: props) {
   const location = useLocation();
-  const navigate = useNavigate();
 
   return (
     <>
@@ -22,7 +21,18 @@ function Navbar({ buttonName, onbuttonclick }: props) {
           padding={1}
           maxWidth={40}
           maxHeight={20}
+          marginLeft={5}
         ></Img>
+        {location.pathname === "/home" ? (
+          <>
+            <Button variant="link" size={"lg"}>
+              My Jobs
+            </Button>
+            <Button variant="link" size={"lg"}>
+              My Profile
+            </Button>
+          </>
+        ) : null}
         <Spacer />
         <Button
           colorScheme="blue"

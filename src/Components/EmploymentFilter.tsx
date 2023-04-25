@@ -20,8 +20,8 @@ interface props {
 
 function EmploymentFilter({ onfilterClick }: props) {
   return (
-    <Accordion defaultIndex={[0, 1, 2]} allowMultiple >
-      <AccordionItem >
+    <Accordion defaultIndex={[0, 1, 2]} allowMultiple>
+      <AccordionItem>
         {({ isExpanded }) => (
           <>
             <AccordionButton margin={2}>
@@ -80,9 +80,15 @@ function EmploymentFilter({ onfilterClick }: props) {
             <AccordionPanel>
               <CheckboxGroup colorScheme="blue" size={"lg"}>
                 <VStack padding={1}>
-                  <Checkbox value="remote">Remote</Checkbox>
-                  <Checkbox value="onSite">On-Site</Checkbox>
-                  <Checkbox value="hybrid">Hybrid</Checkbox>
+                  <Checkbox onChange={() => onfilterClick("remote")}>
+                    Remote
+                  </Checkbox>
+                  <Checkbox onChange={() => onfilterClick("onSite")}>
+                    On-Site
+                  </Checkbox>
+                  <Checkbox onChange={() => onfilterClick("hybrid")}>
+                    Hybrid
+                  </Checkbox>
                 </VStack>
               </CheckboxGroup>
             </AccordionPanel>
@@ -108,16 +114,24 @@ function EmploymentFilter({ onfilterClick }: props) {
               <Center>
                 <List>
                   <ListItem>
-                    <Button>Any time</Button>
+                    <Button variant="link" size={"lg"}>
+                      Any time
+                    </Button>
                   </ListItem>
                   <ListItem>
-                    <Button>Past 24 hours</Button>
+                    <Button variant="link" size={"lg"}>
+                      Past 24 hours
+                    </Button>
                   </ListItem>
                   <ListItem>
-                    <Button>Past week</Button>
+                    <Button variant="link" size={"lg"}>
+                      Past week
+                    </Button>
                   </ListItem>
                   <ListItem>
-                    <Button>Past month</Button>
+                    <Button variant="link" size={"lg"}>
+                      Past month
+                    </Button>
                   </ListItem>
                 </List>
               </Center>
