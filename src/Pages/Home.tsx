@@ -2,7 +2,7 @@ import { Grid, GridItem, Show } from "@chakra-ui/react";
 import { useSignOut } from "react-auth-kit";
 import Navbar from "../Components/Navbar";
 import { useNavigate } from "react-router-dom";
-import useFetchJobs, { EmploymentFilters } from "../Hooks/useFetchJobs";
+import useFetchJobs from "../Hooks/useFetchJobs";
 import JobGrid from "../Components/JobGrid";
 import SideBar from "../Components/SideBar";
 import { useState } from "react";
@@ -17,7 +17,6 @@ function Home({ apikey }: props) {
   const signOut = useSignOut();
   const navigate = useNavigate();
   const { jobData, isLoading, isError } = useFetchJobs(apikey);
-  const [employmentfilter, setEmploymentFilter] = useState<EmploymentFilters>();
 
   const handleLogout = () => {
     navigate("/login");

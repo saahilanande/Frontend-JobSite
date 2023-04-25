@@ -12,18 +12,6 @@ export interface JobDataSchema {
   updatedAt: Date;
 }
 
-export interface EmploymentFilters {
-  fullTime: boolean;
-  partTime: boolean;
-  contract: boolean;
-}
-
-export interface JobTypeFilters {
-  remote: boolean;
-  onsite: boolean;
-  hybrid: boolean;
-}
-
 const useFetchJobs = (apikey: string) => {
   const [jobData, setJobData] = useState<JobDataSchema[]>([]);
   const [isLoading, setisLoading] = useState(false);

@@ -13,8 +13,6 @@ import {
   ListItem,
   VStack,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import { EmploymentFilters } from "../Hooks/useFetchJobs";
 
 interface props {
   onfilterClick: (filtername: string) => void;
