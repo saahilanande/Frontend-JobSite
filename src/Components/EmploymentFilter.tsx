@@ -13,17 +13,20 @@ import {
   ListItem,
   VStack,
 } from "@chakra-ui/react";
+import { useState } from "react";
+import { EmploymentFilters } from "../Hooks/useFetchJobs";
 
-function EmploymentFilter() {
+interface props {
+  onfilterClick: (filtername: string) => void;
+}
+
+function EmploymentFilter({ onfilterClick }: props) {
   return (
-    <Accordion allowMultiple>
+    <Accordion defaultIndex={[0, 1, 2]} allowMultiple>
       <AccordionItem>
         {({ isExpanded }) => (
           <>
-            <AccordionButton
-              _expanded={{ bg: "#3182ce", color: "white" }}
-              margin={3}
-            >
+            <AccordionButton margin={2}>
               <Box as="span" flex="1" textAlign="left" fontWeight={"bold"}>
                 Employment Type
               </Box>
@@ -37,9 +40,24 @@ function EmploymentFilter() {
             <AccordionPanel>
               <CheckboxGroup colorScheme="blue" size={"lg"}>
                 <VStack padding={1}>
-                  <Checkbox value="FullTime">Full-Time</Checkbox>
-                  <Checkbox value="PartTime">Part-Time</Checkbox>
-                  <Checkbox value="Contract">Contracts</Checkbox>
+                  <Checkbox
+                    value="fullTime"
+                    onChange={() => onfilterClick("fullTime")}
+                  >
+                    Full-Time
+                  </Checkbox>
+                  <Checkbox
+                    value="partTime"
+                    onChange={() => onfilterClick("partTime")}
+                  >
+                    Part-Time
+                  </Checkbox>
+                  <Checkbox
+                    value="contract"
+                    onChange={() => onfilterClick("contract")}
+                  >
+                    Contracts
+                  </Checkbox>
                 </VStack>
               </CheckboxGroup>
             </AccordionPanel>
@@ -50,10 +68,7 @@ function EmploymentFilter() {
       <AccordionItem>
         {({ isExpanded }) => (
           <>
-            <AccordionButton
-              _expanded={{ bg: "#3182ce", color: "white" }}
-              margin={3}
-            >
+            <AccordionButton margin={2}>
               <Box as="span" flex="1" textAlign="left" fontWeight={"bold"}>
                 Work Type
               </Box>
@@ -66,10 +81,10 @@ function EmploymentFilter() {
 
             <AccordionPanel>
               <CheckboxGroup colorScheme="blue" size={"lg"}>
-                <VStack>
-                  <Checkbox value="FullTime">Remote</Checkbox>
-                  <Checkbox value="PartTime">On Site</Checkbox>
-                  <Checkbox value="Contract">Hybrid</Checkbox>
+                <VStack padding={1}>
+                  <Checkbox value="remote">Remote</Checkbox>
+                  <Checkbox value="onSite">On-Site</Checkbox>
+                  <Checkbox value="hybrid">Hybrid</Checkbox>
                 </VStack>
               </CheckboxGroup>
             </AccordionPanel>
@@ -80,10 +95,7 @@ function EmploymentFilter() {
       <AccordionItem>
         {({ isExpanded }) => (
           <>
-            <AccordionButton
-              _expanded={{ bg: "#3182ce", color: "white" }}
-              margin={3}
-            >
+            <AccordionButton margin={2}>
               <Box as="span" flex="1" textAlign="left" fontWeight={"bold"}>
                 Date Posted
               </Box>
@@ -98,13 +110,16 @@ function EmploymentFilter() {
               <Center>
                 <List>
                   <ListItem>
-                    <Button>Today</Button>
+                    <Button>Any time</Button>
                   </ListItem>
                   <ListItem>
-                    <Button>1 Week</Button>
+                    <Button>Past 24 hours</Button>
                   </ListItem>
                   <ListItem>
-                    <Button>30 days ago</Button>
+                    <Button>Past week</Button>
+                  </ListItem>
+                  <ListItem>
+                    <Button>Past month</Button>
                   </ListItem>
                 </List>
               </Center>
