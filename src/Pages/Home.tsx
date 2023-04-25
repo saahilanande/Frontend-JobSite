@@ -49,7 +49,7 @@ function Home({ apikey }: props) {
         </Show>
 
         <GridItem area="main" padding={2}>
-          <JobGrid jobData={jobData} />
+          <JobGrid jobData={jobData} jobloading={isLoading} />
         </GridItem>
       </Grid>
     </>
