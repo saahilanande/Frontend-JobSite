@@ -1,6 +1,5 @@
-import { Box, Flex, Heading, VStack } from "@chakra-ui/react";
+import { Alert, AlertIcon, Box, Flex, Heading, VStack } from "@chakra-ui/react";
 import EmploymentFilter from "./EmploymentFilter";
-
 interface props {
   handleFilter: (filtertype: string) => void;
   filterlist: string[];
@@ -9,11 +8,16 @@ interface props {
 function SideBar({ handleFilter, filterlist }: props) {
   return (
     <>
-      <Flex marginLeft={5} padding={10}>
+      <Flex marginLeft={10} marginTop={10}>
         <VStack spacing={1}>
           <Box marginBottom={5}>
             <Heading size={"sm"}>Filters: </Heading>
-            {filterlist.map((data) => data)}
+            {filterlist.map((data) => (
+              <Alert status="info" margin={1} key={data}>
+                <AlertIcon />
+                {data}
+              </Alert>
+            ))}
           </Box>
           <EmploymentFilter
             onfilterClick={(filtername) => handleFilter(filtername)}

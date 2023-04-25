@@ -20,8 +20,8 @@ interface props {
 
 function EmploymentFilter({ onfilterClick }: props) {
   return (
-    <Accordion defaultIndex={[0, 1, 2]} allowMultiple>
-      <AccordionItem>
+    <Accordion defaultIndex={[0, 1, 2]} allowMultiple >
+      <AccordionItem >
         {({ isExpanded }) => (
           <>
             <AccordionButton margin={2}>
