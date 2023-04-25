@@ -104,11 +104,10 @@ function Login({ setApi }: props) {
         </Show>
 
         <GridItem area="aside">
-          <Container marginTop={"10%"}>
+          <Container marginTop={"10%"} boxShadow={"lg"}>
             <Container
               padding={10}
-              borderWidth={"1px"}
-              borderColor={"blackAlpha.300"}
+              boxShadow={"lg"}
             >
               <form onSubmit={handleSubmit}>
                 <FormControl isInvalid={errors.emailTxt ? true : false}>
@@ -208,8 +207,6 @@ function Login({ setApi }: props) {
               centerContent
               marginTop={3}
               padding={5}
-              borderWidth={"1px"}
-              borderColor={"blackAlpha.300"}
             >
               <HStack>
                 <Text>Don't have an account? </Text>

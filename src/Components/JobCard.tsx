@@ -22,6 +22,7 @@ interface props {
 function JobCard({ jobData }: props) {
   return (
     <Card
+      boxShadow={"xl"}
       onClick={() => console.log("Clicked")}
       maxH={"sm"}
       margin={3}
