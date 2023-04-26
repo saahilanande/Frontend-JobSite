@@ -9,6 +9,7 @@ import {
   Heading,
   Image,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import noImage from "../assets/no-image.png";
 import { MdLocationOn } from "react-icons/md";
@@ -20,6 +21,7 @@ interface props {
 }
 
 function JobCard({ jobData }: props) {
+  const bluemode = useColorModeValue("#3182ce", "#90cdf4");
   return (
     <Card
       boxShadow={"xl"}
@@ -50,11 +52,11 @@ function JobCard({ jobData }: props) {
               borderWidth={"1px"}
               bgColor={"black"}
             />
-            <MdLocationOn />
+            <MdLocationOn color={bluemode} />
             <Text>{jobData.location}</Text>
           </HStack>
           <HStack spacing={1}>
-            <RiSuitcaseLine/>
+            <RiSuitcaseLine color={bluemode} />
             <Text fontSize={"xs"}> {jobData.job_type}</Text>
             <Divider
               orientation="vertical"

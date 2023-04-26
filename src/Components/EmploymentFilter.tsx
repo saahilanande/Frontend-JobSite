@@ -35,7 +35,7 @@ function EmploymentFilter({ onfilterClick }: props) {
               )}
             </AccordionButton>
 
-            <AccordionPanel>
+            <AccordionPanel marginRight={100}>
               <CheckboxGroup colorScheme="blue" size={"lg"}>
                 <VStack padding={1}>
                   <Checkbox
@@ -77,9 +77,9 @@ function EmploymentFilter({ onfilterClick }: props) {
               )}
             </AccordionButton>
 
-            <AccordionPanel>
+            <AccordionPanel marginRight={100}>
               <CheckboxGroup colorScheme="blue" size={"lg"}>
-                <VStack padding={1}>
+                <VStack>
                   <Checkbox onChange={() => onfilterClick("remote")}>
                     Remote
                   </Checkbox>
@@ -110,26 +110,26 @@ function EmploymentFilter({ onfilterClick }: props) {
               )}
             </AccordionButton>
 
-            <AccordionPanel>
+            <AccordionPanel marginRight={100}>
               <Center>
                 <List>
                   <ListItem>
-                    <Button variant="link" size={"lg"}>
+                    <Button variant={"ghost"} size={"md"}>
                       Any time
                     </Button>
                   </ListItem>
                   <ListItem>
-                    <Button variant="link" size={"lg"}>
+                    <Button variant={"ghost"} size={"md"}>
                       Past 24 hours
                     </Button>
                   </ListItem>
                   <ListItem>
-                    <Button variant="link" size={"lg"}>
+                    <Button variant={"ghost"} size={"md"}>
                       Past week
                     </Button>
                   </ListItem>
                   <ListItem>
-                    <Button variant="link" size={"lg"}>
+                    <Button variant={"ghost"} size={"md"}>
                       Past month
                     </Button>
                   </ListItem>

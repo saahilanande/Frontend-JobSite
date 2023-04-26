@@ -1,4 +1,11 @@
-import { Alert, AlertIcon, Box, Flex, Heading, VStack } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertIcon,
+  Flex,
+  Heading,
+  SimpleGrid,
+  VStack,
+} from "@chakra-ui/react";
 import EmploymentFilter from "./EmploymentFilter";
 interface props {
   handleFilter: (filtertype: string) => void;
@@ -10,15 +17,15 @@ function SideBar({ handleFilter, filterlist }: props) {
     <>
       <Flex marginLeft={10} marginTop={10}>
         <VStack spacing={1}>
-          <Box marginBottom={5}>
-            <Heading size={"sm"}>Filters: </Heading>
+          <Heading size={"sm"}>Filters: </Heading>
+          <SimpleGrid columns={2} spacing={2}>
             {filterlist.map((data) => (
               <Alert status="info" margin={1} key={data}>
                 <AlertIcon />
                 {data}
               </Alert>
             ))}
-          </Box>
+          </SimpleGrid>
           <EmploymentFilter
             onfilterClick={(filtername) => handleFilter(filtername)}
           />

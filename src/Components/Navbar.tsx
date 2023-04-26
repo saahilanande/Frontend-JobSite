@@ -28,6 +28,7 @@ function Navbar({ buttonName, onbuttonclick }: props) {
             <Button variant="link" size={"lg"}>
               My Jobs
             </Button>
+            <Divider orientation="vertical" height={10} bgColor={"gray"} />
             <Button variant="link" size={"lg"}>
               My Profile
             </Button>
