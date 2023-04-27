@@ -16,10 +16,12 @@ function Home({ apikey }: props) {
   const navigate = useNavigate();
   const [jobTypefilter, setJobTypeFilter] = useState<string[]>([]);
   const [empTypefilter, setEmpTypeFilter] = useState<string[]>([]);
+  const [dateFilter, setDateFilter] = useState("anytime");
   const { jobData, isLoading, isError } = useFetchJobs(
     apikey,
     jobTypefilter,
-    empTypefilter
+    empTypefilter,
+    dateFilter
   );
 
   const handleLogout = () => {
@@ -39,7 +41,8 @@ function Home({ apikey }: props) {
         <Show above="lg">
           <GridItem area="aside">
             <SideBar
-              filterlist={jobTypefilter.concat(empTypefilter)}
+              filterlist={jobTypefilter.concat(empTypefilter, dateFilter)}
+              handleDatefilter={(filtername) => setDateFilter(filtername)}
               handleJobFilter={(filtername) => {
                 if (jobTypefilter.includes(filtername)) {
                   setJobTypeFilter((oldarray) =>

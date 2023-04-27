@@ -17,9 +17,14 @@ import {
 interface props {
   onJobTypefilterClick: (filtername: string) => void;
   onEmpTypefilterClick: (filtername: string) => void;
+  onDatefilterClick: (filtername: string) => void;
 }
 
-function EmploymentFilter({ onJobTypefilterClick,onEmpTypefilterClick }: props) {
+function EmploymentFilter({
+  onJobTypefilterClick,
+  onEmpTypefilterClick,
+  onDatefilterClick,
+}: props) {
   return (
     <Accordion defaultIndex={[0, 1, 2]} allowMultiple>
       <AccordionItem>
@@ -115,22 +120,38 @@ function EmploymentFilter({ onJobTypefilterClick,onEmpTypefilterClick }: props) 
               <Center>
                 <List>
                   <ListItem>
-                    <Button variant={"ghost"} size={"md"}>
+                    <Button
+                      onClick={() => onDatefilterClick("anytime")}
+                      variant={"ghost"}
+                      size={"md"}
+                    >
                       Any time
                     </Button>
                   </ListItem>
                   <ListItem>
-                    <Button variant={"ghost"} size={"md"}>
+                    <Button
+                      onClick={() => onDatefilterClick("today")}
+                      variant={"ghost"}
+                      size={"md"}
+                    >
                       Past 24 hours
                     </Button>
                   </ListItem>
                   <ListItem>
-                    <Button variant={"ghost"} size={"md"}>
+                    <Button
+                      onClick={() => onDatefilterClick("week")}
+                      variant={"ghost"}
+                      size={"md"}
+                    >
                       Past week
                     </Button>
                   </ListItem>
                   <ListItem>
-                    <Button variant={"ghost"} size={"md"}>
+                    <Button
+                      onClick={() => onDatefilterClick("month")}
+                      variant={"ghost"}
+                      size={"md"}
+                    >
                       Past month
                     </Button>
                   </ListItem>

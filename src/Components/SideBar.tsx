@@ -10,10 +10,16 @@ import EmploymentFilter from "./EmploymentFilter";
 interface props {
   handleJobFilter: (filtertype: string) => void;
   handleEmpFilter: (filtertype: string) => void;
+  handleDatefilter: (filtertype: string) => void;
   filterlist: string[];
 }
 
-function SideBar({ handleJobFilter, filterlist, handleEmpFilter }: props) {
+function SideBar({
+  handleJobFilter,
+  filterlist,
+  handleEmpFilter,
+  handleDatefilter,
+}: props) {
   return (
     <>
       <Flex marginLeft={10} marginTop={10}>
@@ -28,6 +34,7 @@ function SideBar({ handleJobFilter, filterlist, handleEmpFilter }: props) {
             ))}
           </SimpleGrid>
           <EmploymentFilter
+            onDatefilterClick={(filtername) => handleDatefilter(filtername)}
             onJobTypefilterClick={(filtername) => handleJobFilter(filtername)}
             onEmpTypefilterClick={(filtername) => handleEmpFilter(filtername)}
           />

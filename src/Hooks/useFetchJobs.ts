@@ -15,7 +15,8 @@ export interface JobDataSchema {
 const useFetchJobs = (
   apikey: string,
   jobTypeFilterList: string[],
-  empTypeFilterList: string[]
+  empTypeFilterList: string[],
+  dateFilter: string
 ) => {
   const [jobData, setJobData] = useState<JobDataSchema[]>([]);
   const [isLoading, setisLoading] = useState(false);
@@ -28,6 +29,7 @@ const useFetchJobs = (
         api_key: apikey,
         job_type: jobTypeFilterList,
         employment_type: empTypeFilterList,
+        updatedAt: dateFilter,
       },
       paramsSerializer: {
         indexes: null,
@@ -41,7 +43,7 @@ const useFetchJobs = (
         setIsError(err.message);
         setisLoading(false);
       });
-  }, [jobTypeFilterList, empTypeFilterList]);
+  }, [jobTypeFilterList, empTypeFilterList, dateFilter]);
 
   return { jobData, isLoading, isError };
 };
