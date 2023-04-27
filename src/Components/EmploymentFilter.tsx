@@ -15,10 +15,11 @@ import {
 } from "@chakra-ui/react";
 
 interface props {
-  onfilterClick: (filtername: string) => void;
+  onJobTypefilterClick: (filtername: string) => void;
+  onEmpTypefilterClick: (filtername: string) => void;
 }
 
-function EmploymentFilter({ onfilterClick }: props) {
+function EmploymentFilter({ onJobTypefilterClick,onEmpTypefilterClick }: props) {
   return (
     <Accordion defaultIndex={[0, 1, 2]} allowMultiple>
       <AccordionItem>
@@ -40,19 +41,19 @@ function EmploymentFilter({ onfilterClick }: props) {
                 <VStack padding={1}>
                   <Checkbox
                     value="fullTime"
-                    onChange={() => onfilterClick("fullTime")}
+                    onChange={() => onEmpTypefilterClick("fullTime")}
                   >
                     Full-Time
                   </Checkbox>
                   <Checkbox
                     value="partTime"
-                    onChange={() => onfilterClick("partTime")}
+                    onChange={() => onEmpTypefilterClick("partTime")}
                   >
                     Part-Time
                   </Checkbox>
                   <Checkbox
                     value="contract"
-                    onChange={() => onfilterClick("contract")}
+                    onChange={() => onEmpTypefilterClick("contract")}
                   >
                     Contracts
                   </Checkbox>
@@ -80,13 +81,13 @@ function EmploymentFilter({ onfilterClick }: props) {
             <AccordionPanel marginRight={100}>
               <CheckboxGroup colorScheme="blue" size={"lg"}>
                 <VStack>
-                  <Checkbox onChange={() => onfilterClick("remote")}>
+                  <Checkbox onChange={() => onJobTypefilterClick("remote")}>
                     Remote
                   </Checkbox>
-                  <Checkbox onChange={() => onfilterClick("onSite")}>
+                  <Checkbox onChange={() => onJobTypefilterClick("onSite")}>
                     On-Site
                   </Checkbox>
-                  <Checkbox onChange={() => onfilterClick("hybrid")}>
+                  <Checkbox onChange={() => onJobTypefilterClick("hybrid")}>
                     Hybrid
                   </Checkbox>
                 </VStack>

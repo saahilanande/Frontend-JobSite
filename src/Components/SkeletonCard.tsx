@@ -4,8 +4,8 @@ function SkeletonCard() {
   const skeletonArray = [1, 2, 3, 4, 5, 6];
   return (
     <Stack padding={10} spacing={2}>
-      {skeletonArray.map((data) => (
-        <Skeleton height="100px" width={"300px"} />
+      {skeletonArray.map((id) => (
+        <Skeleton height="100px" width={"600px"} key={id} />
       ))}
     </Stack>
   );

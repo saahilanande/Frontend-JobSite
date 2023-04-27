@@ -14,8 +14,13 @@ interface props {
 function Home({ apikey }: props) {
   const signOut = useSignOut();
   const navigate = useNavigate();
-  const { jobData, isLoading, isError } = useFetchJobs(apikey);
-  const [filter, setFilter] = useState<string[]>([]);
+  const [jobTypefilter, setJobTypeFilter] = useState<string[]>([]);
+  const [empTypefilter, setEmpTypeFilter] = useState<string[]>([]);
+  const { jobData, isLoading, isError } = useFetchJobs(
+    apikey,
+    jobTypefilter,
+    empTypefilter
+  );
 
   const handleLogout = () => {
     navigate("/login");
@@ -27,21 +32,30 @@ function Home({ apikey }: props) {
       <Grid
         templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
       >
-        <GridItem area="nav" >
+        <GridItem area="nav">
           <Navbar onbuttonclick={() => handleLogout()} buttonName="Logout" />
         </GridItem>
 
         <Show above="lg">
           <GridItem area="aside">
             <SideBar
-              filterlist={filter}
-              handleFilter={(filtername) => {
-                if (filter.includes(filtername)) {
-                  setFilter((oldarray) =>
+              filterlist={jobTypefilter.concat(empTypefilter)}
+              handleJobFilter={(filtername) => {
+                if (jobTypefilter.includes(filtername)) {
+                  setJobTypeFilter((oldarray) =>
                     oldarray.filter((word) => word != filtername)
                   );
                 } else {
-                  setFilter((oldarray) => [...oldarray, filtername]);
+                  setJobTypeFilter((oldarray) => [...oldarray, filtername]);
+                }
+              }}
+              handleEmpFilter={(filtername) => {
+                if (empTypefilter.includes(filtername)) {
+                  setEmpTypeFilter((oldarray) =>
+                    oldarray.filter((word) => word != filtername)
+                  );
+                } else {
+                  setEmpTypeFilter((oldarray) => [...oldarray, filtername]);
                 }
               }}
             />

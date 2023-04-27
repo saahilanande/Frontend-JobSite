@@ -8,11 +8,12 @@ import {
 } from "@chakra-ui/react";
 import EmploymentFilter from "./EmploymentFilter";
 interface props {
-  handleFilter: (filtertype: string) => void;
+  handleJobFilter: (filtertype: string) => void;
+  handleEmpFilter: (filtertype: string) => void;
   filterlist: string[];
 }
 
-function SideBar({ handleFilter, filterlist }: props) {
+function SideBar({ handleJobFilter, filterlist, handleEmpFilter }: props) {
   return (
     <>
       <Flex marginLeft={10} marginTop={10}>
@@ -27,7 +28,8 @@ function SideBar({ handleFilter, filterlist }: props) {
             ))}
           </SimpleGrid>
           <EmploymentFilter
-            onfilterClick={(filtername) => handleFilter(filtername)}
+            onJobTypefilterClick={(filtername) => handleJobFilter(filtername)}
+            onEmpTypefilterClick={(filtername) => handleEmpFilter(filtername)}
           />
         </VStack>
       </Flex>
