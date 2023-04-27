@@ -94,6 +94,7 @@ function Login({ setApi }: props) {
           <Navbar
             onbuttonclick={() => navigate("/register")}
             buttonName="Sign up"
+            onMyJobClick={() => {}}
           />
         </GridItem>
 

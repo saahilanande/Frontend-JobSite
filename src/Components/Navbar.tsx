@@ -7,9 +7,10 @@ import ColorModeSwitch from "./ColorModeSwitch";
 interface props {
   buttonName: string;
   onbuttonclick: () => void;
+  onMyJobClick: () => void;
 }
 
-function Navbar({ buttonName, onbuttonclick }: props) {
+function Navbar({ buttonName, onbuttonclick, onMyJobClick }: props) {
   const location = useLocation();
 
   return (
@@ -25,7 +26,7 @@ function Navbar({ buttonName, onbuttonclick }: props) {
         ></Img>
         {location.pathname === "/home" ? (
           <>
-            <Button variant="link" size={"lg"}>
+            <Button variant="link" size={"lg"} onClick={() => onMyJobClick()}>
               My Jobs
             </Button>
             <Divider orientation="vertical" height={10} bgColor={"gray"} />

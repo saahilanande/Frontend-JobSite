@@ -11,10 +11,11 @@ import { useNavigate } from "react-router-dom";
 
 interface props {
   success: boolean;
-  path: string;
+  handleClick: () => void;
+  successString: string;
 }
 
-function Successful({ success, path }: props) {
+function Successful({ success, handleClick, successString }: props) {
   const navigate = useNavigate();
 
   return (
@@ -26,7 +27,7 @@ function Successful({ success, path }: props) {
               <Icon as={CheckCircleIcon} boxSize={250} color={"green.600"} />
             </Center>
             <Container centerContent marginTop={10}>
-              <Text size={"lg"}>Signed in successfully</Text>
+              <Text size={"lg"}>{successString}</Text>
             </Container>
           </ScaleFade>
         </Container>
@@ -37,7 +38,7 @@ function Successful({ success, path }: props) {
           colorScheme="blue"
           variant={"outline"}
           borderRadius={25}
-          onClick={() => navigate(path)}
+          onClick={() => handleClick()}
         >
           {" "}
           Login{" "}

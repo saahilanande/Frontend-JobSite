@@ -99,7 +99,11 @@ function Register() {
     if (success)
       return (
         <>
-          <Successful success={success} path="/login" />
+          <Successful
+            success={success}
+            successString="Signed in successfully"
+            handleClick={() => navigate("/login")}
+          />
         </>
       );
   }
@@ -108,7 +112,11 @@ function Register() {
     <>
       <Grid templateAreas={{ base: `"nav" "main"` }}>
         <GridItem area="nav">
-          <Navbar onbuttonclick={() => navigate("/login")} buttonName="Login" />
+          <Navbar
+            onMyJobClick={() => {}}
+            onbuttonclick={() => navigate("/login")}
+            buttonName="Login"
+          />
         </GridItem>
 
         <GridItem area="main" padding={2}>

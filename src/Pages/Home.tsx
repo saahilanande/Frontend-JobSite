@@ -35,7 +35,11 @@ function Home({ apikey }: props) {
         templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
       >
         <GridItem area="nav">
-          <Navbar onbuttonclick={() => handleLogout()} buttonName="Logout" />
+          <Navbar
+            onbuttonclick={() => handleLogout()}
+            buttonName="Logout"
+            onMyJobClick={() => {}}
+          />
         </GridItem>
 
         <Show above="lg">
