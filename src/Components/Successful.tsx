@@ -13,9 +13,15 @@ interface props {
   success: boolean;
   handleClick: () => void;
   successString: string;
+  buttonName: string;
 }
 
-function Successful({ success, handleClick, successString }: props) {
+function Successful({
+  success,
+  handleClick,
+  successString,
+  buttonName,
+}: props) {
   const navigate = useNavigate();
 
   return (
@@ -40,8 +46,7 @@ function Successful({ success, handleClick, successString }: props) {
           borderRadius={25}
           onClick={() => handleClick()}
         >
-          {" "}
-          Login{" "}
+          {buttonName}
         </Button>
       </Container>
     </>

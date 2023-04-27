@@ -103,6 +103,7 @@ function Register() {
             success={success}
             successString="Signed in successfully"
             handleClick={() => navigate("/login")}
+            buttonName="Login"
           />
         </>
       );
