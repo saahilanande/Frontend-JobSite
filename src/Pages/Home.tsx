@@ -1,5 +1,5 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
-import { useSignOut } from "react-auth-kit";
+import { useAuthUser, useSignOut } from "react-auth-kit";
 import Navbar from "../Components/Navbar";
 import { useNavigate } from "react-router-dom";
 import useFetchJobs from "../Hooks/useFetchJobs";
@@ -8,25 +8,26 @@ import SideBar from "../Components/SideBar";
 import { useState } from "react";
 import useFetchApplied from "../Hooks/useFetchApplied";
 
-interface props {
-  apikey: string;
-}
-
-function Home({ apikey }: props) {
+function Home() {
+  const auth = useAuthUser();
+  const apiKey = auth()?.apiKey;
+  const userId = auth()?.userId;
   const signOut = useSignOut();
   const navigate = useNavigate();
   const [jobTypefilter, setJobTypeFilter] = useState<string[]>([]);
   const [empTypefilter, setEmpTypeFilter] = useState<string[]>([]);
   const [dateFilter, setDateFilter] = useState("anytime");
   const { jobData, isLoading, isError } = useFetchJobs(
-    apikey,
+    apiKey,
     jobTypefilter,
     empTypefilter,
     dateFilter
   );
-  console.log(apikey);
-  // const { appliedJobData, isAppliedLoading, isAppliedError } =
-  //   useFetchApplied();
+
+  const { appliedJobData, isAppliedLoading, isAppliedError } =
+    useFetchApplied(userId);
+
+  console.log(appliedJobData);
 
   const handleLogout = () => {
     navigate("/login");

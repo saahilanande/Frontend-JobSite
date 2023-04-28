@@ -11,21 +11,12 @@ function App() {
   return (
     <>
       <Routes>
-        <Route
-          element={
-            <Login
-              setApi={(key) => {
-                setApiKey(key);
-              }}
-            />
-          }
-          path="/login"
-        ></Route>
+        <Route element={<Login />} path="/login"></Route>
         <Route
           path={"/home"}
           element={
             <RequireAuth loginPath={"/login"}>
-              <Home apikey={apikey} />
+              <Home />
             </RequireAuth>
           }
         ></Route>

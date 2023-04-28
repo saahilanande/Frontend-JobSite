@@ -30,11 +30,7 @@ import * as Yup from "yup";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import loginBackground from "../assets/loginbackground2.png";
 
-interface props {
-  setApi: (key: string) => void;
-}
-
-function Login({ setApi }: props) {
+function Login() {
   const [show, setShow] = useState(false);
   const [invalidCred, setInvalidCred] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -64,11 +60,13 @@ function Login({ setApi }: props) {
             if (res.status == 200) {
               signIn({
                 token: res.data.accessToken,
-                expiresIn: 3600,
+                expiresIn: 500,
                 tokenType: "Bearer",
-                authState: { email: emailTxt },
+                authState: {
+                  userId: res.data.userId,
+                  apiKey: res.data.api_key,
+                },
               });
-              setApi(res.data.api_key);
               navigate("/home");
             } else {
               console.log("Wrong email addess or password");

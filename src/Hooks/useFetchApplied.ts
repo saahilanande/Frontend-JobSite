@@ -14,7 +14,7 @@ const useFetchApplied = (userId: string) => {
 
   useEffect(() => {
     setisAppliedLoading(true);
-    ApiClient.get("/application/" + userId)
+    ApiClient.get("/application/applied/" + userId)
       .then((res) => {
         setAppliedJobData(res.data);
         setisAppliedLoading(false);
