@@ -24,11 +24,6 @@ function Home() {
     dateFilter
   );
 
-  const { appliedJobData, isAppliedLoading, isAppliedError } =
-    useFetchApplied(userId);
-
-  console.log(appliedJobData);
-
   const handleLogout = () => {
     navigate("/login");
     signOut();
@@ -75,7 +70,11 @@ function Home() {
         </Show>
 
         <GridItem area="main" padding={2}>
-          <JobGrid jobData={jobData} jobloading={isLoading} />
+          <JobGrid
+            jobData={jobData}
+            jobloading={isLoading}
+            userId={userId}
+          />
         </GridItem>
       </Grid>
     </>

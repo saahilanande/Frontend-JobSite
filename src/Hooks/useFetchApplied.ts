@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ApiClient from "../Service/Api-Client";
 
-interface AppliedJob {
+export interface AppliedJob {
   job_id: string;
   user_id: string;
   application_date: string;

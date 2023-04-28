@@ -1,4 +1,5 @@
 import {
+  Badge,
   Button,
   Card,
   CardBody,
@@ -20,11 +21,15 @@ import ApplyModal from "./ApplyModal";
 
 interface props {
   jobData: JobDataSchema;
+  appliedJobId: string[];
 }
 
-function JobCard({ jobData }: props) {
+function JobCard({ jobData, appliedJobId }: props) {
   const bluemode = useColorModeValue("#3182ce", "#90cdf4");
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const alreadyApplied = appliedJobId.includes(jobData._id);
+
   return (
     <>
       <Card
@@ -82,14 +87,20 @@ function JobCard({ jobData }: props) {
               {jobData.job_description}
             </Text>
           </CardBody>
-          <Button
-            marginTop={4}
-            marginRight={2}
-            colorScheme={"blue"}
-            onClick={onOpen}
-          >
-            Easy Apply
-          </Button>
+          {alreadyApplied ? (
+            <Badge variant="subtle" colorScheme="green" maxH={5}>
+              Already Applied
+            </Badge>
+          ) : (
+            <Button
+              marginTop={4}
+              marginRight={2}
+              colorScheme={"blue"}
+              onClick={onOpen}
+            >
+              Easy Apply
+            </Button>
+          )}
         </Flex>
       </Card>
       <ApplyModal
