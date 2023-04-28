@@ -6,6 +6,7 @@ import useFetchJobs from "../Hooks/useFetchJobs";
 import JobGrid from "../Components/JobGrid";
 import SideBar from "../Components/SideBar";
 import { useState } from "react";
+import useFetchApplied from "../Hooks/useFetchApplied";
 
 interface props {
   apikey: string;
@@ -23,6 +24,9 @@ function Home({ apikey }: props) {
     empTypefilter,
     dateFilter
   );
+  console.log(apikey);
+  // const { appliedJobData, isAppliedLoading, isAppliedError } =
+  //   useFetchApplied();
 
   const handleLogout = () => {
     navigate("/login");
