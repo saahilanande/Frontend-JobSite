@@ -92,7 +92,10 @@ function EmploymentFilter({
                   <Checkbox onChange={() => onJobTypefilterClick("onSite")}>
                     On-Site
                   </Checkbox>
-                  <Checkbox onChange={() => onJobTypefilterClick("hybrid")}>
+                  <Checkbox
+                    onChange={() => onJobTypefilterClick("hybrid")}
+                    paddingRight={2}
+                  >
                     Hybrid
                   </Checkbox>
                 </VStack>

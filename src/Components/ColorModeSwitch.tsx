@@ -1,5 +1,5 @@
 import { SunIcon, MoonIcon } from "@chakra-ui/icons";
-import { useColorMode, Switch, Text } from "@chakra-ui/react";
+import { useColorMode, Text, Box, HStack, Button } from "@chakra-ui/react";
 
 function ModeSwitcher() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -7,15 +7,21 @@ function ModeSwitcher() {
   return (
     <>
       {colorMode === "dark" ? (
-        <>
-          <SunIcon onClick={toggleColorMode} _hover={{ cursor: "pointer" }} />{" "}
-          <Text>Light</Text>
-        </>
+        <Button
+          leftIcon={<SunIcon />}
+          variant="Ghost"
+          onClick={toggleColorMode}
+        >
+          Light
+        </Button>
       ) : (
-        <>
-          <MoonIcon onClick={toggleColorMode} _hover={{ cursor: "pointer" }} />{" "}
-          <Text>Dark</Text>
-        </>
+        <Button
+          leftIcon={<MoonIcon />}
+          variant="Ghost"
+          onClick={toggleColorMode}
+        >
+          Dark
+        </Button>
       )}
     </>
   );
