@@ -16,29 +16,41 @@ import {
 import noImage from "../assets/no-image.png";
 import { useState } from "react";
 import Successful from "./Successful";
+import ApiClient from "../Service/Api-Client";
+import { JobDataSchema } from "../Hooks/useFetchJobs";
+import { useAuthUser } from "react-auth-kit";
 
 interface props {
   onClose: () => void;
   isOpen: boolean;
-  jobTitle: string;
-  location: string;
-  jobType: string;
-  empType: string;
-  jobDesc: string;
+  jobData: JobDataSchema;
+  appliedclick: (check: boolean) => void;
 }
 
-function ApplyModal({
-  onClose,
-  isOpen,
-  jobTitle,
-  location,
-  jobType,
-  empType,
-  jobDesc,
-}: props) {
+function ApplyModal({ onClose, isOpen, jobData, appliedclick }: props) {
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
+  const auth = useAuthUser();
+  const apiKey = auth()?.apiKey;
+  const userId = auth()?.userId;
+  const applicationdate = new Date();
   const onApplyClick = () => {
-    setIsSuccess(true);
+    const apply = {
+      job_id: jobData._id,
+      user_id: userId,
+      application_date: applicationdate,
+      resume_file: "applicationDataresume_file",
+    };
+
+    ApiClient.post("/application/addapplication", apply)
+      .then(() => {
+        setisLoading(true);
+        setIsSuccess(true);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setIsSuccess(false);
+      });
   };
 
   return (
@@ -47,7 +59,7 @@ function ApplyModal({
         <ModalOverlay />
 
         <ModalContent>
-          <ModalHeader fontFamily={"sans-serif"}>{jobTitle}</ModalHeader>
+          <ModalHeader fontFamily={"sans-serif"}>{jobData.title}</ModalHeader>
           <ModalCloseButton />
           {isSuccess ? (
             <Successful
@@ -65,7 +77,7 @@ function ApplyModal({
                 <Text fontFamily={"sans-serif"}>Location:</Text>
                 <Spacer />
                 <Text as={"b"} fontFamily={"sans-serif"}>
-                  {location}
+                  {jobData.location}
                 </Text>
               </HStack>
 
@@ -73,19 +85,19 @@ function ApplyModal({
                 <Text fontFamily={"sans-serif"}>Type:</Text>
                 <Spacer />
                 <Text as={"b"} fontFamily={"sans-serif"}>
-                  {jobType}
+                  {jobData.job_type}
                 </Text>
               </HStack>
               <HStack spacing={2} padding={3}>
                 <Text fontFamily={"sans-serif"}>Employment Type</Text>
                 <Spacer />
                 <Text as={"b"} fontFamily={"sans-serif"}>
-                  {empType}
+                  {jobData.employment_type}
                 </Text>
               </HStack>
 
               <Text fontSize="md" fontFamily={"sans-serif"}>
-                {jobDesc}
+                {jobData.job_description}
               </Text>
             </ModalBody>
           )}
@@ -94,7 +106,13 @@ function ApplyModal({
             <ModalFooter>
               <HStack spacing={1}>
                 <Button onClick={onClose}>Close</Button>
-                <Button colorScheme="blue" onClick={() => onApplyClick()}>
+                <Button
+                  colorScheme="blue"
+                  onClick={() => {
+                    onApplyClick();
+                    appliedclick(true);
+                  }}
+                >
                   APPLY
                 </Button>
               </HStack>

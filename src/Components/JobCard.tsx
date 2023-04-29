@@ -18,6 +18,7 @@ import { MdLocationOn } from "react-icons/md";
 import { RiSuitcaseLine } from "react-icons/ri";
 import { JobDataSchema } from "../Hooks/useFetchJobs";
 import ApplyModal from "./ApplyModal";
+import { useState } from "react";
 
 interface props {
   jobData: JobDataSchema;
@@ -27,6 +28,7 @@ interface props {
 function JobCard({ jobData, appliedJobId }: props) {
   const bluemode = useColorModeValue("#3182ce", "#90cdf4");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [applied, setApplied] = useState(false);
 
   const alreadyApplied = appliedJobId.includes(jobData._id);
 
@@ -91,6 +93,10 @@ function JobCard({ jobData, appliedJobId }: props) {
             <Badge variant="subtle" colorScheme="green" maxH={5}>
               Already Applied
             </Badge>
+          ) : applied ? (
+            <Badge variant="subtle" colorScheme="green" maxH={5}>
+              Already Applied
+            </Badge>
           ) : (
             <Button
               marginTop={4}
@@ -106,11 +112,10 @@ function JobCard({ jobData, appliedJobId }: props) {
       <ApplyModal
         onClose={onClose}
         isOpen={isOpen}
-        jobTitle={jobData.title}
-        jobType={jobData.job_type}
-        empType={jobData.employment_type}
-        location={jobData.location}
-        jobDesc={jobData.job_description}
+        jobData={jobData}
+        appliedclick={(value) => {
+          setApplied(value);
+        }}
       />
     </>
   );

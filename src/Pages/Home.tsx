@@ -6,7 +6,6 @@ import useFetchJobs from "../Hooks/useFetchJobs";
 import JobGrid from "../Components/JobGrid";
 import SideBar from "../Components/SideBar";
 import { useState } from "react";
-import useFetchApplied from "../Hooks/useFetchApplied";
 
 function Home() {
   const auth = useAuthUser();
