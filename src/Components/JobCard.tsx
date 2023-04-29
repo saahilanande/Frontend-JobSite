@@ -14,7 +14,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import noImage from "../assets/no-image.png";
-import { MdLocationOn } from "react-icons/md";
+import { MdLocationOn, MdOutlineLocationCity } from "react-icons/md";
 import { RiSuitcaseLine } from "react-icons/ri";
 import { JobDataSchema } from "../Hooks/useFetchJobs";
 import ApplyModal from "./ApplyModal";
@@ -29,7 +29,6 @@ function JobCard({ jobData, appliedJobId }: props) {
   const bluemode = useColorModeValue("#3182ce", "#ED8936");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [applied, setApplied] = useState(false);
-
   const alreadyApplied = appliedJobId.includes(jobData._id);
 
   return (
@@ -73,7 +72,7 @@ function JobCard({ jobData, appliedJobId }: props) {
               marginBottom={1}
             ></Divider>
             <HStack spacing={1}>
-              <RiSuitcaseLine color={bluemode} />
+              <MdOutlineLocationCity color={bluemode} />
               <Text fontSize={"xs"}> {jobData.job_type}</Text>
               <Divider
                 orientation="vertical"

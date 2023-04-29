@@ -6,6 +6,7 @@ import useFetchJobs from "../Hooks/useFetchJobs";
 import JobGrid from "../Components/JobGrid";
 import SideBar from "../Components/SideBar";
 import { useState } from "react";
+import SearchBox from "../Components/SearchBox";
 
 function Home() {
   const auth = useAuthUser();
@@ -69,11 +70,8 @@ function Home() {
         </Show>
 
         <GridItem area="main" padding={2}>
-          <JobGrid
-            jobData={jobData}
-            jobloading={isLoading}
-            userId={userId}
-          />
+          <SearchBox />
+          <JobGrid jobData={jobData} jobloading={isLoading} userId={userId} />
         </GridItem>
       </Grid>
     </>
