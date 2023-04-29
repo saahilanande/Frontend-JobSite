@@ -16,7 +16,8 @@ const useFetchJobs = (
   apikey: string,
   jobTypeFilterList: string[],
   empTypeFilterList: string[],
-  dateFilter: string
+  dateFilter: string,
+  titleFilter: string
 ) => {
   const [jobData, setJobData] = useState<JobDataSchema[]>([]);
   const [isLoading, setisLoading] = useState(false);
@@ -30,6 +31,7 @@ const useFetchJobs = (
         job_type: jobTypeFilterList,
         employment_type: empTypeFilterList,
         updatedAt: dateFilter,
+        title: titleFilter,
       },
       paramsSerializer: {
         indexes: null,
@@ -43,7 +45,7 @@ const useFetchJobs = (
         setIsError(err.message);
         setisLoading(false);
       });
-  }, [jobTypeFilterList, empTypeFilterList, dateFilter]);
+  }, [jobTypeFilterList, empTypeFilterList, dateFilter, titleFilter]);
 
   return { jobData, isLoading, isError };
 };
