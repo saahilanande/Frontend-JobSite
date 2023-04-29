@@ -22,7 +22,7 @@ function SideBar({
 }: props) {
   return (
     <>
-      <Flex marginLeft={10} marginTop={10}>
+      <Flex marginLeft={10} marginTop={10} padding={5}>
         <VStack spacing={1}>
           <Heading size={"sm"}>Filters: </Heading>
           <SimpleGrid columns={2} spacing={2}>

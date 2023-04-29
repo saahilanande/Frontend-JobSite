@@ -26,7 +26,7 @@ interface props {
 }
 
 function JobCard({ jobData, appliedJobId }: props) {
-  const bluemode = useColorModeValue("#3182ce", "#90cdf4");
+  const bluemode = useColorModeValue("#3182ce", "#ED8936");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [applied, setApplied] = useState(false);
 
@@ -90,12 +90,12 @@ function JobCard({ jobData, appliedJobId }: props) {
             </Text>
           </CardBody>
           {alreadyApplied ? (
-            <Badge variant="subtle" colorScheme="green" maxH={5}>
-              Already Applied
+            <Badge variant="subtle" colorScheme="green" maxH={5} marginTop={4}>
+              Already Applied!
             </Badge>
           ) : applied ? (
-            <Badge variant="subtle" colorScheme="green" maxH={5}>
-              Already Applied
+            <Badge variant="subtle" colorScheme="green" maxH={5} marginTop={4}>
+              Applied!
             </Badge>
           ) : (
             <Button

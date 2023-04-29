@@ -3,6 +3,7 @@ import { JobDataSchema } from "../Hooks/useFetchJobs";
 import JobCard from "./JobCard";
 import SkeletonCard from "./SkeletonCard";
 import useFetchApplied from "../Hooks/useFetchApplied";
+import NoDataFound from "./NoDataFound";
 
 interface props {
   jobData: JobDataSchema[];
@@ -20,6 +21,8 @@ function JobGrid({ jobData, jobloading, userId }: props) {
   });
 
   if (jobloading) return <SkeletonCard />;
+  if (jobData.length === 0)
+    return <NoDataFound heading="No Job Posting Found !" />;
   return (
     <>
       <SimpleGrid columns={1} padding={10}>

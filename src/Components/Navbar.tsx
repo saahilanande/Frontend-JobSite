@@ -1,7 +1,7 @@
 import { Button, Divider, HStack, Img, Spacer } from "@chakra-ui/react";
 import AvatarMenu from "./AvatarMenu";
 import logo from "../assets/logo.png";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import ColorModeSwitch from "./ColorModeSwitch";
 
 interface props {
@@ -23,6 +23,7 @@ function Navbar({ buttonName, onbuttonclick, onMyJobClick }: props) {
           maxWidth={40}
           maxHeight={20}
           marginLeft={5}
+          onClick={() => window.location.reload()}
         ></Img>
         {location.pathname === "/home" ? (
           <>
