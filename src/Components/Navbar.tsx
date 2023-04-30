@@ -22,7 +22,8 @@ function Navbar({ buttonName, onbuttonclick, onMyJobClick }: props) {
           padding={1}
           maxWidth={40}
           maxHeight={20}
-          marginLeft={5}
+          marginLeft={"16"}
+          marginRight={"32"}
           onClick={() => window.location.reload()}
         ></Img>
         {location.pathname === "/home" ? (

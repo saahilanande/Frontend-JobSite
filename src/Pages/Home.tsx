@@ -28,6 +28,7 @@ function Home() {
     locationString
   );
 
+
   const handleLogout = () => {
     navigate("/login");
     signOut();
