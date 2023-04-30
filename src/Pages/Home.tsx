@@ -18,12 +18,14 @@ function Home() {
   const [empTypefilter, setEmpTypeFilter] = useState<string[]>([]);
   const [dateFilter, setDateFilter] = useState("anytime");
   const [titleString, setTitleString] = useState("");
+  const [locationString, setLocationString] = useState("");
   const { jobData, isLoading, isError } = useFetchJobs(
     apiKey,
     jobTypefilter,
     empTypefilter,
     dateFilter,
-    titleString
+    titleString,
+    locationString
   );
 
   const handleLogout = () => {
@@ -73,7 +75,8 @@ function Home() {
 
         <GridItem area="main" padding={2}>
           <SearchBox
-            onSearchClick={(titleString) => setTitleString(titleString)}
+            onTitleSearchClick={(titleString) => setTitleString(titleString)}
+            onLocationSearchClick={(location) => setLocationString(location)}
           />
           <JobGrid jobData={jobData} jobloading={isLoading} userId={userId} />
         </GridItem>

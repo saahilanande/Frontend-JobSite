@@ -122,12 +122,7 @@ function Register() {
 
         <GridItem area="main" padding={2}>
           <Container>
-            <Container
-              padding={10}
-              borderStyle={"solid"}
-              borderWidth={"1px"}
-              borderColor={"blackAlpha.500"}
-            >
+            <Container padding={10} borderStyle={"solid"} borderWidth={"1px"}>
               <Container centerContent>
                 <Text>Use google account</Text>
               </Container>
@@ -148,7 +143,7 @@ function Register() {
                 <form onSubmit={handleSubmit}>
                   <FormControl isInvalid={errors.firstnametxt ? true : false}>
                     <FormLabel marginTop={3}>First Name</FormLabel>
-                    <InputGroup borderWidth={3} marginTop={3}>
+                    <InputGroup marginTop={3}>
                       <InputLeftElement
                         pointerEvents="none"
                         children={<ChevronRightIcon color="gray.600" />}
@@ -161,7 +156,6 @@ function Register() {
                         size="md"
                         type="text"
                         placeholder="First Name"
-                        borderColor={"blackAlpha.500"}
                       />
                     </InputGroup>
                     {touched.firstnametxt && errors.firstnametxt ? (
@@ -170,7 +164,7 @@ function Register() {
                   </FormControl>
                   <FormControl isInvalid={errors.lastnametxt ? true : false}>
                     <FormLabel marginTop={3}>Last Name</FormLabel>
-                    <InputGroup borderWidth={3} marginTop={3}>
+                    <InputGroup marginTop={3}>
                       <InputLeftElement
                         pointerEvents="none"
                         children={<ChevronRightIcon color="gray.600" />}
@@ -183,7 +177,6 @@ function Register() {
                         size="md"
                         type="text"
                         placeholder="Last Name"
-                        borderColor={"blackAlpha.500"}
                       />
                     </InputGroup>
                     {touched.lastnametxt && errors.lastnametxt ? (
@@ -192,7 +185,7 @@ function Register() {
                   </FormControl>
                   <FormControl isInvalid={errors.emailtxt ? true : false}>
                     <FormLabel marginTop={3}>Email</FormLabel>
-                    <InputGroup borderWidth={3} marginTop={3}>
+                    <InputGroup marginTop={3}>
                       <InputLeftElement
                         pointerEvents="none"
                         children={<AtSignIcon color="gray.600" />}
@@ -205,7 +198,6 @@ function Register() {
                         size="md"
                         type="email"
                         placeholder="example@.com"
-                        borderColor={"blackAlpha.500"}
                       />
                     </InputGroup>
                     {touched.emailtxt && errors.emailtxt ? (
@@ -214,7 +206,7 @@ function Register() {
                   </FormControl>
                   <FormControl isInvalid={errors.passwordtxt ? true : false}>
                     <FormLabel marginTop={3}>Password</FormLabel>
-                    <InputGroup borderWidth={3} marginTop={3}>
+                    <InputGroup marginTop={3}>
                       <Input
                         id="passwordtxt"
                         onChange={handleChange}
@@ -223,7 +215,6 @@ function Register() {
                         size="md"
                         type={show ? "text" : "password"}
                         placeholder="password"
-                        borderColor={"blackAlpha.500"}
                       />
                       <InputRightElement>
                         <Button
@@ -242,7 +233,7 @@ function Register() {
                   </FormControl>
                   <FormControl isInvalid={errors.phonetxt ? true : false}>
                     <FormLabel marginTop={3}>Mobile Number</FormLabel>
-                    <InputGroup borderWidth={3} marginTop={3}>
+                    <InputGroup marginTop={3}>
                       <InputLeftElement
                         pointerEvents="none"
                         children={<PhoneIcon color="gray.600" />}
@@ -255,7 +246,6 @@ function Register() {
                         placeholder="Phone number"
                         id="phonetxt"
                         size="md"
-                        borderColor={"blackAlpha.500"}
                       />
                     </InputGroup>
                     {touched.phonetxt && errors.phonetxt ? (
@@ -295,7 +285,6 @@ function Register() {
               padding={5}
               borderStyle={"solid"}
               borderWidth={"1px"}
-              borderColor={"blackAlpha.500"}
             >
               <HStack>
                 <Text>Already have a account? </Text>

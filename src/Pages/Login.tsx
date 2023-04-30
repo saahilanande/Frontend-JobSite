@@ -104,12 +104,7 @@ function Login() {
 
         <GridItem area="aside">
           <Container marginTop={"10%"}>
-            <Container
-              padding={10}
-              borderWidth={"1px"}
-              borderColor={"blackAlpha.300"}
-              boxShadow={"lg"}
-            >
+            <Container padding={10} borderWidth={"1px"} boxShadow={"lg"}>
               <form onSubmit={handleSubmit}>
                 <FormControl isInvalid={errors.emailTxt ? true : false}>
                   <FormLabel marginTop={3}>Email</FormLabel>
@@ -123,7 +118,6 @@ function Login() {
                     value={values.emailTxt}
                     onBlur={handleBlur}
                     placeholder="example@.com"
-                    borderColor={"blackAlpha.300"}
                   />
                   {touched.emailTxt && errors.emailTxt ? (
                     <FormErrorMessage>{errors.emailTxt}</FormErrorMessage>
@@ -142,7 +136,6 @@ function Login() {
                       onChange={handleChange}
                       value={values.passwordTxt}
                       onBlur={handleBlur}
-                      borderColor={"blackAlpha.300"}
                     />
                     <InputRightElement>
                       <Button
@@ -209,7 +202,6 @@ function Login() {
               marginTop={3}
               padding={5}
               borderWidth={"1px"}
-              borderColor={"blackAlpha.300"}
               boxShadow={"lg"}
             >
               <HStack>

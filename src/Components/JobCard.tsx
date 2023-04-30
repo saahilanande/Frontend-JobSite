@@ -89,11 +89,23 @@ function JobCard({ jobData, appliedJobId }: props) {
             </Text>
           </CardBody>
           {alreadyApplied ? (
-            <Badge variant="subtle" colorScheme="green" maxH={5} marginTop={4}>
+            <Badge
+              variant="subtle"
+              colorScheme="green"
+              maxH={5}
+              marginTop={4}
+              marginRight={2}
+            >
               Already Applied!
             </Badge>
           ) : applied ? (
-            <Badge variant="subtle" colorScheme="green" maxH={5} marginTop={4}>
+            <Badge
+              variant="subtle"
+              colorScheme="green"
+              maxH={5}
+              marginTop={4}
+              marginRight={2}
+            >
               Applied!
             </Badge>
           ) : (
