@@ -9,9 +9,10 @@ interface props {
   jobData: JobDataSchema[];
   jobloading: boolean;
   userId: string;
+  onMyJobClicked: boolean;
 }
 
-function JobGrid({ jobData, jobloading, userId }: props) {
+function JobGrid({ jobData, jobloading, userId, onMyJobClicked }: props) {
   const appliedJobIds: string[] = [];
   const { appliedJobData, isAppliedLoading, isAppliedError } =
     useFetchApplied(userId);
@@ -25,11 +26,30 @@ function JobGrid({ jobData, jobloading, userId }: props) {
     return <NoDataFound heading="No Job Posting Found !" />;
   return (
     <>
-      <SimpleGrid columns={1} padding={10}>
-        {jobData.map((data) => (
-          <JobCard key={data._id} jobData={data} appliedJobId={appliedJobIds} />
-        ))}
-      </SimpleGrid>
+      {onMyJobClicked ? (
+        <SimpleGrid columns={1} padding={10}>
+          {jobData.map(
+            (data) =>
+              appliedJobIds.includes(data._id) && (
+                <JobCard
+                  key={data._id}
+                  jobData={data}
+                  appliedJobId={appliedJobIds}
+                />
+              )
+          )}
+        </SimpleGrid>
+      ) : (
+        <SimpleGrid columns={1} padding={10}>
+          {jobData.map((data) => (
+            <JobCard
+              key={data._id}
+              jobData={data}
+              appliedJobId={appliedJobIds}
+            />
+          ))}
+        </SimpleGrid>
+      )}
     </>
   );
 }

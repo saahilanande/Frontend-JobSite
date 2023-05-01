@@ -13,6 +13,7 @@ function Home() {
   const apiKey = auth()?.apiKey;
   const userId = auth()?.userId;
   const signOut = useSignOut();
+  const [myJob, setmyJob] = useState(false);
   const navigate = useNavigate();
   const [jobTypefilter, setJobTypeFilter] = useState<string[]>([]);
   const [empTypefilter, setEmpTypeFilter] = useState<string[]>([]);
@@ -28,7 +29,6 @@ function Home() {
     locationString
   );
 
-
   const handleLogout = () => {
     navigate("/login");
     signOut();
@@ -43,7 +43,7 @@ function Home() {
           <Navbar
             onbuttonclick={() => handleLogout()}
             buttonName="Logout"
-            onMyJobClick={() => {}}
+            onMyJobClick={() => setmyJob(!myJob)}
           />
         </GridItem>
 
@@ -79,7 +79,12 @@ function Home() {
             onTitleSearchClick={(titleString) => setTitleString(titleString)}
             onLocationSearchClick={(location) => setLocationString(location)}
           />
-          <JobGrid jobData={jobData} jobloading={isLoading} userId={userId} />
+          <JobGrid
+            jobData={jobData}
+            jobloading={isLoading}
+            userId={userId}
+            onMyJobClicked={myJob}
+          />
         </GridItem>
       </Grid>
     </>
