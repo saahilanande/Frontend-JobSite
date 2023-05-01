@@ -8,7 +8,7 @@ export interface AppliedJob {
   application_date: string;
 }
 
-const useFetchApplied = (userId: string) => {
+const useFetchApplied = (userId: string, myJob: boolean) => {
   const [appliedJobData, setAppliedJobData] = useState<AppliedJob[]>([]);
   const [isAppliedLoading, setisAppliedLoading] = useState(false);
   const [isAppliedError, setisAppliedError] = useState("");
@@ -30,7 +30,7 @@ const useFetchApplied = (userId: string) => {
         setisAppliedError(err.message);
         setisAppliedLoading(false);
       });
-  }, []);
+  }, [myJob]);
 
   return { appliedJobData, isAppliedLoading, isAppliedError };
 };

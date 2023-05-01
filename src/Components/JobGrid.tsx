@@ -10,12 +10,21 @@ interface props {
   jobloading: boolean;
   userId: string;
   onMyJobClicked: boolean;
+  myJob: boolean;
 }
 
-function JobGrid({ jobData, jobloading, userId, onMyJobClicked }: props) {
+function JobGrid({
+  jobData,
+  jobloading,
+  userId,
+  onMyJobClicked,
+  myJob,
+}: props) {
   const appliedJobIds: string[] = [];
-  const { appliedJobData, isAppliedLoading, isAppliedError } =
-    useFetchApplied(userId);
+  const { appliedJobData, isAppliedLoading, isAppliedError } = useFetchApplied(
+    userId,
+    myJob
+  );
 
   appliedJobData.map((data) => {
     appliedJobIds.push(data.job_id);

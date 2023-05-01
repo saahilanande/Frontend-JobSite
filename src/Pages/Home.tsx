@@ -81,6 +81,7 @@ function Home() {
             onLocationSearchClick={(location) => setLocationString(location)}
           />
           <JobGrid
+            myJob={myJob}
             jobData={jobData}
             jobloading={isLoading}
             userId={userId}
