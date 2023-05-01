@@ -1,17 +1,24 @@
 import { Button, Divider, HStack, Img, Spacer } from "@chakra-ui/react";
 import AvatarMenu from "./AvatarMenu";
 import logo from "../assets/logo.png";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ColorModeSwitch from "./ColorModeSwitch";
 
 interface props {
   buttonName: string;
   onbuttonclick: () => void;
   onMyJobClick: () => void;
+  onMyJobClicked: boolean;
 }
 
-function Navbar({ buttonName, onbuttonclick, onMyJobClick }: props) {
+function Navbar({
+  buttonName,
+  onbuttonclick,
+  onMyJobClick,
+  onMyJobClicked,
+}: props) {
   const location = useLocation();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -28,11 +35,22 @@ function Navbar({ buttonName, onbuttonclick, onMyJobClick }: props) {
         ></Img>
         {location.pathname === "/home" ? (
           <>
-            <Button variant="link" size={"lg"} onClick={() => onMyJobClick()}>
+            <Button
+              variant="link"
+              size={"lg"}
+              onClick={() => onMyJobClick()}
+              colorScheme={onMyJobClicked ? "blue" : "gray"}
+            >
               My Jobs
             </Button>
             <Divider orientation="vertical" height={10} bgColor={"gray"} />
-            <Button variant="link" size={"lg"}>
+            <Button
+              variant="link"
+              size={"lg"}
+              onClick={() => {
+                navigate("/profile");
+              }}
+            >
               My Profile
             </Button>
           </>

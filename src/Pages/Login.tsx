@@ -90,6 +90,7 @@ function Login() {
       >
         <GridItem area="nav">
           <Navbar
+            onMyJobClicked={false}
             onbuttonclick={() => navigate("/register")}
             buttonName="Sign up"
             onMyJobClick={() => {}}

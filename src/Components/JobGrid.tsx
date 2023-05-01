@@ -21,7 +21,7 @@ function JobGrid({ jobData, jobloading, userId, onMyJobClicked }: props) {
     appliedJobIds.push(data.job_id);
   });
 
-  if (jobloading) return <SkeletonCard />;
+  if (jobloading || isAppliedLoading) return <SkeletonCard />;
   if (jobData.length === 0)
     return <NoDataFound heading="No Job Posting Found !" />;
   return (

@@ -5,7 +5,7 @@ function SkeletonCard() {
   return (
     <Stack padding={10} spacing={2}>
       {skeletonArray.map((id) => (
-        <Skeleton height="100px" width={"600px"} key={id} />
+        <Skeleton height="100px" width={"700px"} key={id} />
       ))}
     </Stack>
   );

@@ -114,6 +114,7 @@ function Register() {
       <Grid templateAreas={{ base: `"nav" "main"` }}>
         <GridItem area="nav">
           <Navbar
+            onMyJobClicked={false}
             onMyJobClick={() => {}}
             onbuttonclick={() => navigate("/login")}
             buttonName="Login"

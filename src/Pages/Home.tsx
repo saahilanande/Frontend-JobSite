@@ -41,6 +41,7 @@ function Home() {
       >
         <GridItem area="nav">
           <Navbar
+            onMyJobClicked={myJob}
             onbuttonclick={() => handleLogout()}
             buttonName="Logout"
             onMyJobClick={() => setmyJob(!myJob)}
