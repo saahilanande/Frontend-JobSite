@@ -1,16 +1,34 @@
 import React from "react";
 import useFetchUser from "../Hooks/useFetchUser";
-import { useAuthUser } from "react-auth-kit";
-import { Center, Grid, GridItem, Heading } from "@chakra-ui/react";
+import { useAuthUser, useSignOut } from "react-auth-kit";
+import {
+  Center,
+  Container,
+  Grid,
+  GridItem,
+  HStack,
+  Heading,
+  Stack,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import Navbar from "../Components/Navbar";
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { EditIcon, EmailIcon, LockIcon, PhoneIcon } from "@chakra-ui/icons";
+import { FaLocationArrow } from "react-icons/fa";
+import { BsPersonFill } from "react-icons/bs";
 
 function Profile() {
   const auth = useAuthUser();
-  const apiKey = auth()?.apiKey;
   const userId = auth()?.userId;
+  const signOut = useSignOut();
   const navigate = useNavigate();
   const { userData, isLoading, isError } = useFetchUser(userId);
+
+  const handleLogout = () => {
+    navigate("/login");
+    signOut();
+  };
 
   return (
     <>
@@ -19,8 +37,8 @@ function Profile() {
           <Navbar
             onMyJobClicked={false}
             onMyJobClick={() => {}}
-            onbuttonclick={() => navigate("/login")}
-            buttonName="Login"
+            onbuttonclick={() => handleLogout()}
+            buttonName="Logout"
           />
         </GridItem>
 
@@ -29,8 +47,71 @@ function Profile() {
             <Heading size={"2xl"} fontFamily={"cursive"} color={"gray"}>
               About You
             </Heading>
+            <EditIcon
+              boxSize={10}
+              color={"gray"}
+              marginLeft={5}
+              _hover={{ cursor: "pointer", color: "black" }}
+            />
           </Center>
-          <form></form>
+          <Container padding={5}>
+            <VStack spacing={2}>
+              <Container margin={2}>
+                <Heading size={"lg"}>Name</Heading>
+                <HStack>
+                  <BsPersonFill />
+                  <Text fontSize="2xl">
+                    {userData?.first_name} {userData?.last_name}
+                  </Text>
+                </HStack>
+              </Container>
+              <Container margin={2}>
+                <Heading size={"lg"}>Email</Heading>
+                <HStack>
+                  <EmailIcon />
+                  <Text fontSize="2xl">{userData?.email}</Text>
+                </HStack>
+              </Container>
+              <Container margin={2}>
+                <Heading size={"lg"}>Phone</Heading>
+                <HStack>
+                  <PhoneIcon />
+                  <Text fontSize="2xl">{userData?.phone}</Text>
+                </HStack>
+              </Container>
+              {userData?.location && (
+                <Container margin={2}>
+                  <Heading size={"lg"}>Location</Heading>
+                  <HStack>
+                    <FaLocationArrow />.
+                    <Text fontSize="2xl">{userData?.location}</Text>
+                  </HStack>
+                </Container>
+              )}
+
+              <Container margin={2}>
+                <Heading size={"lg"}>Password</Heading>
+                <HStack>
+                  <LockIcon />
+                  <Text fontSize="2xl">{userData?.password}</Text>
+                </HStack>
+              </Container>
+              {userData?.skills && (
+                <Container margin={2} padding={5}>
+                  <Heading size={"lg"}>Skills</Heading>
+                  <Stack spacing={4} direction="row">
+                    {userData?.skills.map((data) => (
+                      <>
+                        <Text fontSize="2xl">
+                          {data.skill_name} {data.skill_level}
+                        </Text>
+                      </>
+                    ))}
+                  </Stack>
+                </Container>
+              )}
+            </VStack>
+          </Container>
         </GridItem>
       </Grid>
     </>

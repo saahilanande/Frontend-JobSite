@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ApiClient from "../Service/Api-Client";
+import { useAuthUser } from "react-auth-kit";
 
 interface User {
   _id: string;
@@ -9,11 +10,15 @@ interface User {
   password: string;
   phone: number;
   location: string;
+  skills: {
+    skill_name: string;
+    skill_level: number;
+  }[];
 }
 
-interface Skill {}
-
 const useFetchUser = (userId: string) => {
+  const auth = useAuthUser();
+  const apiKey = auth()?.apiKey;
   const [userData, setUserdata] = useState<User>();
   const [isLoading, setisLoading] = useState(false);
   const [isError, setIsError] = useState("");
@@ -22,7 +27,7 @@ const useFetchUser = (userId: string) => {
     setisLoading(true);
     ApiClient.get("/user/" + userId, {
       params: {
-        api_key: "saahil",
+        api_key: apiKey,
       },
     })
       .then((res) => {
