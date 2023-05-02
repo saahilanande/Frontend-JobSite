@@ -31,7 +31,10 @@ function Navbar({
           maxHeight={20}
           marginLeft={"16"}
           marginRight={"32"}
-          onClick={() => window.location.reload()}
+          onClick={() => {
+            navigate("/home");
+            window.location.reload();
+          }}
         ></Img>
         {location.pathname === "/home" ? (
           <>

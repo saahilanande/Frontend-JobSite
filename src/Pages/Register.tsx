@@ -33,6 +33,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import ApiClient from "../Service/Api-Client";
 import Successful from "../Components/Successful";
+import { FcGoogle } from "react-icons/fc";
 
 function Register() {
   const navigate = useNavigate();
@@ -124,8 +125,16 @@ function Register() {
         <GridItem area="main" padding={2}>
           <Container>
             <Container padding={10} borderStyle={"solid"} borderWidth={"1px"}>
-              <Container centerContent>
-                <Text>Use google account</Text>
+              <Container
+                centerContent
+                border={1}
+                borderStyle={"solid"}
+                _hover={{ cursor: "pointer", opacity: "0.8" }}
+              >
+                <HStack spacing={2} padding={2}>
+                  <FcGoogle size={"23px"} />
+                  <Text fontSize={"lg"}>Use google account</Text>
+                </HStack>
               </Container>
               <Box marginTop={2}>
                 <HStack spacing={2}>

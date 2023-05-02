@@ -43,7 +43,7 @@ function JobCard({ jobData, appliedJobId }: props) {
       >
         <Flex padding={2}>
           <Center>
-            <Image boxSize={20} src={noImage} alt="No image"></Image>
+            <Image boxSize={"120px"} src={noImage} alt="No image"></Image>
           </Center>
           <CardBody>
             <Heading

@@ -18,6 +18,7 @@ import {
   InputRightElement,
   Show,
   Spinner,
+  Stack,
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -29,6 +30,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import loginBackground from "../assets/loginbackground2.png";
+import { FcGoogle } from "react-icons/fc";
 
 function Login() {
   const [show, setShow] = useState(false);
@@ -193,8 +195,16 @@ function Login() {
                   />
                 </HStack>
               </Box>
-              <Container centerContent>
-                <Text>Use google account</Text>
+              <Container
+                centerContent
+                border={1}
+                borderStyle={"solid"}
+                _hover={{ cursor: "pointer", opacity: "0.8" }}
+              >
+                <HStack spacing={2} padding={2}>
+                  <FcGoogle size={"23px"} />
+                  <Text fontSize={"lg"}>Use google account</Text>
+                </HStack>
               </Container>
             </Container>
 
