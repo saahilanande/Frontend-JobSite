@@ -11,12 +11,14 @@ import {
   Stack,
   Text,
   VStack,
+  useDisclosure,
 } from "@chakra-ui/react";
 import Navbar from "../Components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { EditIcon, EmailIcon, LockIcon, PhoneIcon } from "@chakra-ui/icons";
 import { FaLocationArrow } from "react-icons/fa";
 import { BsPersonFill } from "react-icons/bs";
+import ProfileEdit from "../Components/ProfileEdit";
 
 function Profile() {
   const auth = useAuthUser();
@@ -24,6 +26,7 @@ function Profile() {
   const signOut = useSignOut();
   const navigate = useNavigate();
   const { userData, isLoading, isError } = useFetchUser(userId);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleLogout = () => {
     navigate("/login");
@@ -52,6 +55,7 @@ function Profile() {
               color={"gray"}
               marginLeft={5}
               _hover={{ cursor: "pointer", color: "black" }}
+              onClick={onOpen}
             />
           </Center>
           <Container padding={5}>
@@ -96,7 +100,7 @@ function Profile() {
                   <Text fontSize="2xl">{userData?.password}</Text>
                 </HStack>
               </Container>
-              {userData?.skills && (
+              {userData?.skills.length && (
                 <Container margin={2} padding={5}>
                   <Heading size={"lg"}>Skills</Heading>
                   <Stack spacing={4} direction="row">
@@ -112,6 +116,7 @@ function Profile() {
               )}
             </VStack>
           </Container>
+          <ProfileEdit userData={userData} onClose={onClose} isOpen={isOpen} />
         </GridItem>
       </Grid>
     </>

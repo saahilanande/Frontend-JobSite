@@ -13,7 +13,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import noImage from "../assets/no-image.png";
+import noImage from "../assets/company.png";
 import { MdLocationOn, MdOutlineLocationCity } from "react-icons/md";
 import { RiSuitcaseLine } from "react-icons/ri";
 import { JobDataSchema } from "../Hooks/useFetchJobs";

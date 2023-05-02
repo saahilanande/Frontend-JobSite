@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ApiClient from "../Service/Api-Client";
 import { useAuthUser } from "react-auth-kit";
 
-interface User {
+export interface User {
   _id: string;
   first_name: string;
   last_name: string;
@@ -25,7 +25,7 @@ const useFetchUser = (userId: string) => {
 
   useEffect(() => {
     setisLoading(true);
-    ApiClient.get("/user/" + userId, {
+    ApiClient.get<User>("/user/" + userId, {
       params: {
         api_key: apiKey,
       },
