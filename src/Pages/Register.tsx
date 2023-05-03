@@ -129,7 +129,7 @@ function Register() {
                 centerContent
                 border={1}
                 borderStyle={"solid"}
-                _hover={{ cursor: "pointer", opacity: "0.8" }}
+                _hover={{ cursor: "no-drop", opacity: "0.8" }}
               >
                 <HStack spacing={2} padding={2}>
                   <FcGoogle size={"23px"} />

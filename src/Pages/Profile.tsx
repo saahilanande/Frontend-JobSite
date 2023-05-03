@@ -19,6 +19,7 @@ import { EditIcon, EmailIcon, LockIcon, PhoneIcon } from "@chakra-ui/icons";
 import { FaLocationArrow } from "react-icons/fa";
 import { BsPersonFill } from "react-icons/bs";
 import ProfileEdit from "../Components/ProfileEdit";
+import SkeletonDetails from "../Components/SkeletonDetails";
 
 function Profile() {
   const auth = useAuthUser();
@@ -58,6 +59,7 @@ function Profile() {
               onClick={onOpen}
             />
           </Center>
+          {isLoading && <SkeletonDetails />}
           <Container padding={5}>
             <VStack spacing={2}>
               <Container margin={2}>
