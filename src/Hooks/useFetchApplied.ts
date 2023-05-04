@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ApiClient from "../Service/Api-Client";
-import { useAuthUser } from "react-auth-kit";
+import { useAuthHeader, useAuthUser } from "react-auth-kit";
 
 export interface AppliedJob {
   job_id: string;
@@ -14,6 +14,7 @@ const useFetchApplied = (userId: string, myJob: boolean) => {
   const [isAppliedError, setisAppliedError] = useState("");
   const auth = useAuthUser();
   const apiKey = auth()?.apiKey;
+  const authHeader = useAuthHeader();
 
   useEffect(() => {
     setisAppliedLoading(true);
@@ -21,6 +22,7 @@ const useFetchApplied = (userId: string, myJob: boolean) => {
       params: {
         api_key: apiKey,
       },
+      headers: { Authorization: authHeader() },
     })
       .then((res) => {
         setAppliedJobData(res.data);

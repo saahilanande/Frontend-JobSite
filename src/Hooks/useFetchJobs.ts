@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ApiClient from "../Service/Api-Client";
+import { useAuthHeader } from "react-auth-kit";
 
 export interface JobDataSchema {
   _id: string;
@@ -23,6 +24,7 @@ const useFetchJobs = (
   const [jobData, setJobData] = useState<JobDataSchema[]>([]);
   const [isLoading, setisLoading] = useState(false);
   const [isError, setIsError] = useState("");
+  const authHeader = useAuthHeader();
 
   useEffect(() => {
     setisLoading(true);
@@ -38,6 +40,7 @@ const useFetchJobs = (
       paramsSerializer: {
         indexes: null,
       },
+      headers: { Authorization: authHeader() },
     })
       .then((res) => {
         setJobData(res.data);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ApiClient from "../Service/Api-Client";
-import { useAuthUser } from "react-auth-kit";
+import { useAuthHeader, useAuthUser } from "react-auth-kit";
 
 export interface User {
   _id: string;
@@ -22,6 +22,7 @@ const useFetchUser = (userId: string) => {
   const [userData, setUserdata] = useState<User>();
   const [isLoading, setisLoading] = useState(false);
   const [isError, setIsError] = useState("");
+  const authHeader = useAuthHeader();
 
   useEffect(() => {
     setisLoading(true);
@@ -29,6 +30,7 @@ const useFetchUser = (userId: string) => {
       params: {
         api_key: apiKey,
       },
+      headers: { Authorization: authHeader() },
     })
       .then((res) => {
         setUserdata(res.data);

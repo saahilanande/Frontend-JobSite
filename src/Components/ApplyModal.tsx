@@ -19,7 +19,7 @@ import { useState } from "react";
 import Successful from "./Successful";
 import ApiClient from "../Service/Api-Client";
 import { JobDataSchema } from "../Hooks/useFetchJobs";
-import { useAuthUser } from "react-auth-kit";
+import { useAuthHeader, useAuthUser } from "react-auth-kit";
 import { MdLocationOn, MdOutlineLocationCity } from "react-icons/md";
 import { RiSuitcaseLine } from "react-icons/ri";
 
@@ -37,6 +37,7 @@ function ApplyModal({ onClose, isOpen, jobData, appliedclick }: props) {
   const auth = useAuthUser();
   const apiKey = auth()?.apiKey;
   const userId = auth()?.userId;
+  const authHeader = useAuthHeader();
   const applicationdate = new Date();
   const onApplyClick = () => {
     const apply = {
@@ -46,7 +47,9 @@ function ApplyModal({ onClose, isOpen, jobData, appliedclick }: props) {
       resume_file: "applicationDataresume_file",
     };
 
-    ApiClient.post("/application/addapplication", apply)
+    ApiClient.post("/application/addapplication", apply, {
+      headers: { Authorization: authHeader() },
+    })
       .then(() => {
         setisLoading(true);
         setIsSuccess(true);
