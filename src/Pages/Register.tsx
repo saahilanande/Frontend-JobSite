@@ -81,14 +81,13 @@ function Register() {
         setIsLoading(true);
         ApiClient.post("/user/adduser", userinfo)
           .then((res) => {
-            if (res.data) {
-              if (res.status === 208) {
-                setEmailExist(true);
-                setIsLoading(false);
-              } else {
-                setIsLoading(false);
-                setSuccess(true);
-              }
+            if (res.status === 208) {
+              setEmailExist(true);
+              setIsLoading(false);
+            }
+            if (res.status == 200) {
+              setIsLoading(false);
+              setSuccess(true);
             }
           })
           .catch((err) => {
