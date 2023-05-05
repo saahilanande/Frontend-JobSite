@@ -28,7 +28,7 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import loginBackground from "../assets/loginbackground2.png";
+import loginBackground from "../assets/Loginback.svg";
 import { FcGoogle } from "react-icons/fc";
 
 function Login() {
@@ -83,7 +83,6 @@ function Login() {
           });
       },
     });
-    
 
   return (
     <>
