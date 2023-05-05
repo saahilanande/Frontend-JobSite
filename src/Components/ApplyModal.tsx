@@ -48,6 +48,9 @@ function ApplyModal({ onClose, isOpen, jobData, appliedclick }: props) {
     };
 
     ApiClient.post("/application/addapplication", apply, {
+      params: {
+        api_key: apiKey,
+      },
       headers: { Authorization: authHeader() },
     })
       .then(() => {
